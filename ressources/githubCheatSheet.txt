@@ -1,0 +1,20 @@
+Clone:
+	git clone https://github.com/webNeat/SMA.git
+Create Branch:
+	git checkout -b <branch-name>
+Loop:
+	Make modifications:
+		...
+	Save Modifications:
+		git add .
+		git commit -m "description"
+		git push -u origin <branch-name>
+Pull Request:
+	@GitHub
+Verification & Merge:
+	@GitHub
+Sync:
+	git checkout master
+	git pull
+	git branch -d <branch-name>
+	git checkout -b <branch-name>
