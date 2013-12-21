@@ -1,0 +1,1 @@
+- Reimplémenter les generateurs en static !

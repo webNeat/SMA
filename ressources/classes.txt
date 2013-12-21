@@ -1,0 +1,16 @@
+Classes
+    World
+    School
+    Company
+    Skill
+    Student
+        Employee
+    
+    Generators
+
+    Interface (SDL, Console)
+        Console
+        SDLInterface
+
+Structures
+    Internship

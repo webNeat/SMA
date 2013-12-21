@@ -1,0 +1,8 @@
+files/
+    input.txt
+    output.txt
+ressources/
+    [les fichiers d'analyse]
+generators.hpp
+generators.cpp
+

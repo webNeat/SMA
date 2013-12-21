@@ -1,0 +1,53 @@
+Réunion 1:
+    Objectifs:
+        L'idée
+        Les objectifs : les inputs et outputs
+        Analyse & Conception 
+            Le choix des technologies
+            Les classes (analyses)
+        1ere Milestone : les taches de chacun !
+    Resultats:
+        Idée : Simulation des étudiants vis-à-vis des entreprises
+        Les inputs:
+            On va initialiser le monde virtuel par un ensemble des écoles et des entreprises.
+        Les outputs:
+            Pour chaque année:
+                Pour chaque école:
+                    Le taux de chômage
+                    Le pourcentage des créateurs des entreprises
+                    Les compétences les plus demandés au marché
+                Pour les entreprises:
+                    Nombres de stagiaires
+                    Nombres des employés recrutés
+                    Nombres des retraités !
+                Nombre des Entreprises Crées
+                Nombre des Entreprises Dissoutes
+                Nombre des gens sortis en chômage
+                Nombre des gens qui ont obtenu un travail
+        Analyse & Conception:
+            Technologies:    
+                ST2 : Éditeur de texte
+                C++ : langage de Programmation
+                CppUnit : Les testes unitaires ! (à voir)
+                SDL : Bibliothèque l'interface graphique
+                Git (Github) : Gestionaire des versions. On l'utilise pour le partage de code source et la collaboration à distance.
+                Doxygen : Générateur de documentation
+                Entreprise Architect : Dessiner les diagrammes UML. 
+            Les classes (voir classes.txt)
+**********************************************************************************************************
+Réunion 2:
+    Temps : 15:00 - 18:00 
+    Objectifs :
+        Tester Github (Mettre notre méthodes)
+        Tester Doxygen
+        Voir Comment utiliser le CppUnit !
+    Resultats:
+        Git (lase9)
+        Diagramme des classes d'analyse.
+***********************************************************************************************************
+Réunion 3:
+    Temps : 17-12-2013 : 20:00
+    Objectifs:
+        La struture générale.
+        Objectifs de la version 1
+        Classes des conceptions ( version 1 )
