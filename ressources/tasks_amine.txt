@@ -1,0 +1,2 @@
+- Create the tasks files
+- Reimplémenter les generateurs en static !

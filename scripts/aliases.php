@@ -1,5 +1,5 @@
 <?php
-$branchName = "nabil-dev";
+$branchName = "amine-dev";
 switch($argv[1]){
 	case 'save':
 		shell_exec("git add .");
