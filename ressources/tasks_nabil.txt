@@ -1,1 +1,14 @@
-- Reimplémenter les generateurs en static ! : 
+Application
+    vector<Skill>
+    vector<SkillGroup> 
+    HashMap<string, double> parametres
+    World current
+    Interface
+    EventHandler
+
+    addParametre()
+    addSkill()
+    makeSkillGroup()
+    addSkillToGroup()
+    init()
+    run()

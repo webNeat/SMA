@@ -1,2 +1,11 @@
-- Create the tasks files
-- Reimplémenter les generateurs en static !
+Reimplémenter les generateurs en static !
+
+Interface
+    hashMap<string, Page>
+
+    displayPage()
+
+EventHandler
+    Event 
+
+    handle()
