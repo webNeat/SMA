@@ -108,7 +108,7 @@ private:
 	static GraphicItemType token_;
 	static Interface* interface_;
 public:
-	static Interface makeInterfaceFromFile(string);
+	// static Interface makeInterfaceFromFile(string);
 	static bool readLine();
 	static bool parseWindow();
 	static bool parseLabel(Window&);

@@ -2,9 +2,11 @@
 #include <sstream>
 #include "application.hpp"
 int main(int, char**){
-
-	Application application;
-	application.init();
+	Application::init();
+	Application::saveParams();
+	Application::saveSkills();
+	Application::saveGroupSkills();
+	Application::saveWorld();
 
 	// /*Remplir Params Configuration*/
 	// for (int i = 0; i < 10; ++i){
@@ -66,6 +68,6 @@ int main(int, char**){
 	// application.addWorld(world);
 
 	// Affichage de L'application
-	cout << application.toString();
+	// cout << application.toString();
 	return 0;
 }

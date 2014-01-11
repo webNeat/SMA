@@ -1,3 +1,4 @@
+#include "application.hpp"
 #include "company.hpp"
 Company::Company(){}
 // Company::Company(string name, vector<Level> levels){
@@ -35,7 +36,7 @@ string Company::toString(){
 		
 	// }
 	for (int i = 0; i < group_.skills_.size(); ++i){
-		ss << "Skill " << [group_.skills_[i]].name_<< endl;
+		ss << "Skill " << Application::getSkills().at(group_.skills_[i]).name_ << endl;
 		
 	}
 	return ss.str();

@@ -1,6 +1,9 @@
 #include "application.hpp"
 
-Application::Application(){}
+vector<Skill> Application::skills_;
+vector<SkillGroup> Application::skillsGroups_;
+map<string,double> Application::params_;
+World Application::currentWorld_;
 
 void Application::addParams(string key, double value){
 	params_.insert(pair<string, double>(key,value));
@@ -93,7 +96,6 @@ void Application::init(){
 	
 	//skillsGroups_.push_back(group1);
 
-
 	SkillGroup& group2 = makeSkillGroup("Medcine");
 	addSkillToGroup(id4,group2);
 
@@ -102,12 +104,11 @@ void Application::init(){
 	// group2.skills_.push_back(&skills_.at(id4));
 	//skillsGroups_.push_back(group2);
 
-	
 }
 
 void Application::saveSkills(){
 	ofstream f;
-	f.open("skills.sdb");
+	f.open("files/skills.sdb");
 	if(f){
 		for (int i = 0; i < skills_.size(); ++i)
 		{
@@ -126,7 +127,7 @@ void Application::loadSkills(){
 	string s;
 	Skill skill;
 
-	f.open("skills.sdb");
+	f.open("files/skills.sdb");
 	if(f){
 		getline(f,s);
 		while(!f.eof()){
@@ -147,12 +148,13 @@ void Application::loadSkills(){
 
 void Application::saveParams(){
 	ofstream f;
-	f.open("params.sdb");
+	f.open("files/params.sdb");
 	if(f){
 		f << params_.size() << endl;
 		for (map<string,double>::iterator it = params_.begin(); it != params_.end(); ++it)
 		{
-			f << strReplace(it->first,' ', '#') << " " <<it->second << endl;
+			string s = it -> first;
+			f << strReplace(s,' ', '#') << " " << it->second << endl;
 		}
 		f.close();
 
@@ -167,7 +169,7 @@ void Application::loadParams(){
 	string key;
 	double value;
 	int taille;
-	f.open("params.sdb");
+	f.open("files/params.sdb");
 	if(f){
 		f >> taille;
 		for (int i = 0; i < taille; ++i)
@@ -189,7 +191,7 @@ void Application::loadParams(){
 
 void Application::saveGroupSkills(){
 	ofstream f;
-	f.open("groupskills.sdb");
+	f.open("files/groupskills.sdb");
 	if(f){
 		int tailleG = skillsGroups_.size();
 		f << tailleG << endl;
@@ -219,16 +221,15 @@ void Application::loadGroupSkills(){
 	ifstream f;
 	int tailleG, tailleS;
 	string nameG;
-	SkillGroup& group;
 	int id;
-	f.open("groupskills.sdb");
+	f.open("files/groupskills.sdb");
 	if(f){
 		f >> tailleG;
 		for (int i = 0; i < tailleG; ++i)
 		{
 			f >> nameG;
 			f >> strReplace(nameG, '#', ' ');
-			group = makeSkillGroup(nameG);
+			SkillGroup& group = makeSkillGroup(nameG);
 			f >> tailleS;
 			for (int j = 0; j < tailleS; ++j)
 			{
@@ -243,4 +244,16 @@ void Application::loadGroupSkills(){
 		cerr << "Impossible d'ouvrir le fichier !!" << endl;
 	}	
 
+}
+
+vector<Skill>& Application::getSkills(){
+	return skills_;
+}
+
+void Application::saveWorld(){
+	currentWorld_.save();
+}
+
+void Application::loadWorld(){
+	currentWorld_.load();
 }
