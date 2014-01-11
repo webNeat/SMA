@@ -19,7 +19,7 @@ Level::~Level(){
 
 }
 int Level::getId(){
-	retunr id_;
+	return id_;
 }
 int Level::getstudentNumber(){
 	return studentNumber_;

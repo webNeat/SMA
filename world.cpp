@@ -1,3 +1,4 @@
+#include "application.hpp"
 #include "world.hpp"
 World::World(){
 
@@ -33,9 +34,9 @@ string World::toString(){
 
 void World::save(){
 	ofstream f;
-	int tailleC, tailleS, tailleGC, tailleLvelS,tailleSGL;
+	int tailleC, tailleS, tailleGC, tailleLvelS, tailleSGL;
 	
-	f.open("world.sdb");
+	f.open("files/world.sdb");
 	if(f){
 		/*Writing Companies*/
 		tailleC =  companies_.size();
@@ -43,14 +44,16 @@ void World::save(){
 		f << tailleC << endl;
 		for (int i = 0; i < tailleC; ++i)
 		{
-			f << strReplace(companies_.at(i).getName(),' ','#') << " ";
-			f << strReplace(companies_.at(i).getGroup().name_,' ', '#') << " ";
+			string s = companies_.at(i).getName();
+			f << strReplace(s,' ','#') << " ";
+			s = companies_.at(i).getGroup().name_;
+			f << strReplace(s,' ', '#') << " ";
 			tailleGC = companies_.at(i).getGroup().skills_.size();
 			f << tailleGC << " " ;
 			for (int j = 0; j < tailleGC; ++j)
 			{
-				f << strReplace(companies_.at(i).getGroup().skills_.at(j).name_,' ', '#') << " ";
-
+				string s = Application::getSkills().at(companies_.at(i).getGroup().skills_.at(j)).name_;
+				f << strReplace(s,' ', '#') << " ";
 			}
 			f << endl;
 
@@ -62,7 +65,8 @@ void World::save(){
 		f << tailleS << endl;
 		for (int i = 0; i < tailleS; ++i)
 		{
-			f << strReplace(schools_.at(i).getName(), ' ', '#') << " ";
+			string s = schools_.at(i).getName();
+			f << strReplace(s, ' ', '#') << " ";
 			f << schools_.at(i).getPosition().getX() << " " << schools_.at(i).getPosition().getY() << " ";
 			tailleLvelS = schools_.at(i).getLevels().size();
 			f << tailleLvelS << " ";
@@ -75,7 +79,7 @@ void World::save(){
 			 	tailleSGL = schools_.at(i).getLevels().at(j).getSkillGroup().skills_.size();
 			 	f << tailleSGL << " ";
 			 	for (int k = 0; k < tailleSGL; ++k)
-			 	{	string nameSGL = schools_.at(i).getLevels().at(j).getSkillGroup().skills_.at(k).name_;
+			 	{	string nameSGL = Application::getSkills().at(schools_.at(i).getLevels().at(j).getSkillGroup().skills_.at(k)).name_;
 			 		f << strReplace(nameSGL, ' ', '#') << " ";
 			 	}
 
@@ -105,10 +109,10 @@ void World::save(){
 void World::load(){
 	ifstream f;
 	int tailleC, tailleSGC, tailleS;
-	string nameC, nameGC;
+	string nameC, nameGC, nameSGC;
 	SkillGroup groupC;
 	Skill skill;
-	f.open("world.sdb");
+	f.open("files/world.sdb");
 	if(f){
 		/*Reading Compnies*/
 		f >> tailleC;
@@ -123,7 +127,7 @@ void World::load(){
 			{
 				f >> nameSGC;
 				skill.name_ = strReplace(nameSGC,'#', ' ');
-				groupC.skills_.push_back(skill);
+				groupC.skills_.push_back(Application::addSkill(skill));
 
 			}
 			company.addGroupSkills(groupC);
@@ -163,7 +167,7 @@ void World::load(){
 					f >> nameSGS;
 					
 					skill2.name_ = strReplace(nameSGS, '#', ' ');
-					groupLS.skills_.push_back(skill2);
+					groupLS.skills_.push_back(Application::addSkill(skill2));
 				
 				}
 

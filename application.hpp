@@ -12,30 +12,31 @@
 using namespace std;
 
 class Application {
-	private:
-		vector<Skill> skills_;
-		vector<SkillGroup> skillsGroups_;
-		map<string,double> params_;
-		World currentWorld_;
-		// Interface interface_;
-		// EventHandler event_;
-	 public:
-	 	Application();
-		void addParams(string key, double value);
-		int addSkill(Skill& l);
-	 	SkillGroup& makeSkillGroup(string name);
-	 	void addSkillToGroup(int, SkillGroup& groupe);
-	 	map<string, double>& getParams();
-	 	void addWorld(World& world);
-	 	string toString();
-		void init();
-		void run();
-		void saveParams();
-		void loadParams();
-		void saveSkills();
-		void loadSkills();
-		void saveGroupSkills();
-		void loadGroupSkills();
-		
+private:
+	static vector<Skill> skills_;
+	static vector<SkillGroup> skillsGroups_;
+	static map<string,double> params_;
+	static World currentWorld_;
+	// Interface interface_;
+	// EventHandler event_;
+public:
+	static void addParams(string key, double value);
+	static int addSkill(Skill& l);
+ 	static SkillGroup& makeSkillGroup(string name);
+ 	static void addSkillToGroup(int, SkillGroup& groupe);
+ 	static map<string, double>& getParams();
+ 	static void addWorld(World& world);
+ 	static string toString();
+	static void init();
+	static void run();
+	static void saveParams();
+	static void loadParams();
+	static void saveSkills();
+	static void loadSkills();
+	static void saveGroupSkills();
+	static void loadGroupSkills();
+	static vector<Skill>& getSkills();
+	static void saveWorld();
+	static void loadWorld();
 };
 #endif

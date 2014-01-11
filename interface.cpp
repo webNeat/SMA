@@ -157,24 +157,25 @@ bool Parser::readLine(){
 	}
 	return true;
 }
-bool Parser::parseInterface(Interface* interface, string filePath){
-	cout << "parseInterface begin !" << endl;
-	bool error = false;
-	input_.open(filePath.c_str());
-	interface_ = interface;
-	while(!error && readLine()){
-		if(token_ == EMPTY) 
-			break;
-		if(token_ == WINDOW){
-			if(!parseWindow()){
-				error = true;
-			}
-		}else{
-			error = true;
-		}
-	}
-	return !error;
-}
+// bool Parser::parseInterface(Interface* interface, string filePath){
+// 	cout << "parseInterface begin !" << endl;
+// 	bool error = false;
+// 	input_.open(filePath.c_str());
+// 	interface_ = interface;
+// 	while(!error && readLine()){
+// 		if(token_ == EMPTY) 
+// 			break;
+// 		if(token_ == WINDOW){
+// 			if(!parseWindow()){
+// 				error = true;
+// 			}
+// 		}else{
+// 			error = true;
+// 		}
+// 	}
+// 	return !error;
+// }
+
 bool Parser::parseWindow(){
 	cout << "parseWindow begin !" << endl;
 	Window window;
@@ -305,8 +306,12 @@ bool Parser::parseTextField(Form& form){
 }
 
 // Interface
+// bool Interface::parse(string filePath){
+// 	return Parser::parseInterface(this, filePath);
+// }
+
 bool Interface::parse(string filePath){
-	return Parser::parseInterface(this, filePath);
+	return true;
 }
 
 void Interface::displayWindow(string name){
