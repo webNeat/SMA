@@ -1,5 +1,3 @@
-#variables de base
-
 # compilateur
 cc = g++
 # options de compilation (utilisé en cc -c)

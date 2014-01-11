@@ -67,6 +67,5 @@ int main(int, char**){
 
 	// Affichage de L'application
 	cout << application.toString();
-
 	return 0;
 }

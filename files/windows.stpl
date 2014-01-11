@@ -1,0 +1,16 @@
+#: Syntaxes:
+#: Comment 	=> #:comment text
+#: Window 	=> W:name:title:nbItems
+#: Label 	=> L:value
+#: Menu 	=> M:nbItems
+#: MenuItem	=> I:key:value:target
+#: Form 	=> F:target:nbItems
+#: TextField=> T:label:name
+#: --------------------------------
+#: Home Page
+W:home:First Interface:1
+	L:Welcome to our Application
+W:page1:Page 1:1
+	L:You are in Page1
+W:page2:Page 2:1
+	L:You are in Page2
