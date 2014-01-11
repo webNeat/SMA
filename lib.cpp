@@ -57,3 +57,14 @@ int strToInt(string& str){
 	ss >> x;
 	return x;
 }
+
+string& strReplace(string& text, char toReplace, char with){
+	int size = text.size();
+	int i = 0;
+	while(i < size){
+		if(text.at(i) == toReplace)
+			text.at(i) = with;
+		i++;
+	}
+	return text;
+}
