@@ -1,27 +1,30 @@
+#ifndef WORLD_HPP
+#define WORLD_HPP
+#include "company.hpp"
+#include "school.hpp"
 #include <vector>
-#include "generators.hpp"
+#include <sstream>
+#include "lib.hpp"
+#include <fstream>
 using namespace std;
-
 class World {
-private:
-    vector<Company> companies_;
-    vector<School> schools_;
-    vector<Statistic> stats_;
-    vector<Actor *> actors_;
-public:
-    World();
-    World(const World &);
-    World & operator=(const World &);
-    ~World();
 
-    int newSkill(string name);
-    int findSkill(string name);
+	private:
+		vector<Company> companies_;
+		vector<School> schools_;
 
-    int newCompany(string name, int numEmployees);
-    void addSkillToCompany(int skillId, int companyId);
-    
-    int newSchool(string name, int numStudents);
-    void addSkillToSchool(int skillId, int schoolId, int level);
+	public:
+		string toString();
+		void addSchool(School school);
+		void addCompany(Company company);
+		World();
+		~World();
+		//World(const World &s);
+		//World& operator=(const World &s); 
 
-    void nextYear();
-}
+		void save();
+		void load();
+
+	
+};
+#endif
