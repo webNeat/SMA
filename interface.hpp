@@ -90,25 +90,7 @@ public:
 	~Window(){};
 };
 
-class Interface;
-class Parser {
-private:
-	static ifstream input_;
-	static vector<string> parametres_;
-	static GraphicItemType token_;
-	static Interface* interface_;
-public:
-	static bool readLine();
-	static bool parseInterface(Interface*, string);
-	static bool parseWindow();
-	static bool parseLabel(Window&);
-	static bool parseMenu(Window&);
-	static bool parseMenuItem(Menu&);
-	static bool parseForm(Window&);
-	static bool parseTextField(Form&);
-};
-
-class Interface {
+class Interface{
 private:
 	vector<Window> windows_;
 public:
@@ -118,5 +100,23 @@ public:
 	void displayWindow(string);
 	void displayWindows();
 };
+
+class Parser{
+private:
+	static ifstream input_;
+	static vector<string> parametres_;
+	static GraphicItemType token_;
+	static Interface* interface_;
+public:
+	static Interface makeInterfaceFromFile(string);
+	static bool readLine();
+	static bool parseWindow();
+	static bool parseLabel(Window&);
+	static bool parseMenu(Window&);
+	static bool parseMenuItem(Menu&);
+	static bool parseForm(Window&);
+	static bool parseTextField(Form&);
+};
+
 
 #endif

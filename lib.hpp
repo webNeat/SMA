@@ -8,4 +8,5 @@ using namespace std;
 string& trim(string&);
 vector<string> splitString(string haystack, char separateur);
 int strToInt(string&);
+string& strReplace(string&, char, char);
 #endif
