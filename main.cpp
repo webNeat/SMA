@@ -3,10 +3,10 @@
 #include "application.hpp"
 int main(int, char**){
 	Application::init();
-	Application::saveParams();
-	Application::saveSkills();
-	Application::saveGroupSkills();
-	Application::saveWorld();
+	// Application::saveParams();
+	// Application::saveSkills();
+	// Application::saveGroupSkills();
+	// Application::saveWorld();
 
 	// /*Remplir Params Configuration*/
 	// for (int i = 0; i < 10; ++i){

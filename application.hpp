@@ -22,7 +22,7 @@ private:
 public:
 	static void addParams(string key, double value);
 	static int addSkill(Skill& l);
- 	static SkillGroup& makeSkillGroup(string name);
+ 	static SkillGroup makeSkillGroup(string name);
  	static void addSkillToGroup(int, SkillGroup& groupe);
  	static map<string, double>& getParams();
  	static void addWorld(World& world);
