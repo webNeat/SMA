@@ -4,6 +4,7 @@ Level::Level(){
 }
 
 Level::Level(int id, int studentNumber, SkillGroup skillGroup, double successPercentage, bool hasInternship, double internshipDuration, int internshipStart, int internshipEnd){
+	cout << "dkhal"<<endl;
 	this->id_ = id;
 	this->studentNumber_ = studentNumber;
 	this->skillGroup_ = skillGroup;

@@ -99,6 +99,26 @@ void Application::init(){
 	SkillGroup& group2 = makeSkillGroup("Medcine");
 	addSkillToGroup(id4,group2);
 
+
+	/*Remplir Schools*/
+	Point position(10,10);
+	School school("ISIMA", position);
+	cout << "before affectation" << endl;
+	SkillGroup group3 = group1;
+	cout << "before Construct" << endl;
+	Level level1(1,100, group3, 70.78, true, 2, 7, 9);
+	cout << "before Construct" << endl;
+//	Level level2(2,200, group3, 60, true, 5, 4, 9);
+	//school.addLevel(level1);
+	// school.addLevel(level2);
+	// currentWorld_.addSchool(school);
+
+	/*Remplir Compnies*/
+
+	// Company company("ATOS");
+	// company.addGroupSkills(group1);
+	// currentWorld_.addCompany(company);
+	
 	// SkillGroup group2;
 	// group2.name_ = "Medcine";
 	// group2.skills_.push_back(&skills_.at(id4));
