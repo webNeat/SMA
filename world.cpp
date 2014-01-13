@@ -1,9 +1,8 @@
 #include "application.hpp"
 #include "world.hpp"
 
-World::World(){}
-
-World::~World(){}
+vector<Company> World::companies_;
+vector<School> World::schools_;
 
 int World::addSchool(string name, int x, int y){
 	// check if there is no school with the same name !
@@ -12,6 +11,10 @@ int World::addSchool(string name, int x, int y){
 	return schools_.size() - 1;
 }
 
+void World::clear(){
+	companies_.clear();
+	schools_.clear();
+}
 School& World::getSchool(int schoolId){
 	// if(schoolId < schools_.size())
 	return schools_.at(schoolId);

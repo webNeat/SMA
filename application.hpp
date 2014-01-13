@@ -13,7 +13,6 @@ using namespace std;
 
 class Application {
 private:
-	static World currentWorld_;
 	static vector<Skill> skills_;
 	static map<string, SkillGroup> skillGroups_;
 	static map<string, double> params_;
@@ -36,10 +35,6 @@ public:
 	static void saveGroupSkills();
 	static void loadGroupSkills();
  	
- 	static void addWorld(World& world);
-	static void saveWorld();
-	static void loadWorld();
-
 	static void init();
 	static void run();
  	static string toString();
