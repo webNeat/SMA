@@ -182,52 +182,6 @@ void Application::init(){
 	loadSkills();
 	loadGroupSkills();
 	loadWorld();
-	// /* Remplir Params Configuration */
-	// for (int i = 0; i < 10; ++i){
-	// 	stringstream ss;
-	// 	ss << "succes pourcentage " << i;
-	// 	addParam( ss.str(), ( i * 2.0 ) / 1.5 );
-	// }		
-	// /* Remplir Skills */
-	// int id1 = addSkill("C++");
-	// int id2 = addSkill("Java");
-	// int id3 = addSkill("PHP");
-	// int id4 = addSkill("Biologie");
-
-	// /*Remplir Group SKILLS*/
-	// addSkillGroup("Informatique");
-	// addSkillToGroup(id1, "Informatique");
-	// addSkillToGroup(id2, "Informatique");
-	// addSkillToGroup(id3, "Informatique");
-	
-	// //skillGroups_.push_back(group1);
-	// addSkillGroup("Medcine");
-	// addSkillToGroup(id4, "Medcine");
-
-	// /*Remplir Schools*/
-	// int isimaId = currentWorld_.addSchool("ISIMA", 10, 10);
-	// School& isima = currentWorld_.getSchool(isimaId);
-	// int levelId = isima.addLevel(1, 100, 70.78, true, 2, 7, 9);
-	// isima.addSkillToLevel(id1, levelId);
-	// isima.addSkillToLevel(id2, levelId);
-	// isima.addSkillToLevel(id3, levelId);
-
-//	Level level2(2,200, group3, 60, true, 5, 4, 9);
-	//school.addLevel(level1);
-	// school.addLevel(level2);
-	// currentWorld_.addSchool(school);
-
-	/*Remplir Compnies*/
-
-	// Company company("ATOS");
-	// company.addGroupSkills(group1);
-	// currentWorld_.addCompany(company);
-	
-	// SkillGroup group2;
-	// group2.name_ = "Medcine";
-	// group2.skills_.push_back(&skills_.at(id4));
-	//skillGroups_.push_back(group2);
-
 }
 
 string Application::toString(){

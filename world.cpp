@@ -15,11 +15,17 @@ int World::addSchool(string name, int x, int y){
 School& World::getSchool(int schoolId){
 	// if(schoolId < schools_.size())
 	return schools_.at(schoolId);
-
 }
 
-int World::addCompany(Company company){
+int World::addCompany(string name){
+	Company company(name);
 	companies_.push_back(company);
+	return companies_.size() - 1;
+}
+
+Company& World::getCompany(int companyId){
+	// if(companyId < companies_.size())
+	return companies_.at(companyId);
 }
 
 string World::toString(){
@@ -48,25 +54,17 @@ void World::save(){
 	if(f){
 		/*Writing Companies*/
 		tailleC =  companies_.size();
-		
 		f << tailleC << endl;
-		for (int i = 0; i < tailleC; ++i)
-		{
+		for (int i = 0; i < tailleC; ++i){
 			string s = companies_.at(i).getName();
 			f << strReplace(s,' ','#') << " ";
-			s = companies_.at(i).getGroup().name_;
-			f << strReplace(s,' ', '#') << " ";
-			tailleGC = companies_.at(i).getGroup().skills_.size();
+			tailleGC = companies_.at(i).getSkills().size();
 			f << tailleGC << " " ;
-			for (int j = 0; j < tailleGC; ++j)
-			{
-				string s = Application::getSkills().at(companies_.at(i).getGroup().skills_.at(j)).name_;
-				f << strReplace(s,' ', '#') << " ";
+			for (int j = 0; j < tailleGC; ++j){
+				f << companies_.at(i).getSkills().at(j) << " ";
 			}
 			f << endl;
-
 		}
-
 		/*Writing Schools*/
 		string nameGL; 
 		tailleS = schools_.size();
@@ -116,23 +114,16 @@ void World::load(){
 	if(f){
 		/*Reading Compnies*/
 		f >> tailleC;
-		for (int i = 0; i < tailleC; ++i)
-		{
+		for (int i = 0; i < tailleC; ++i){
 			f >> nameC; 
-			Company company(strReplace(nameC,'#',' '));
-			f >> nameGC;
-			groupC.name_ = nameGC;
+			Company& company = getCompany(addCompany(nameC));
 			f >> tailleSGC;
-			for (int j = 0; j < tailleSGC; ++j)
-			{
-				f >> nameSGC;
-				groupC.skills_.push_back(Application::addSkill(nameSGC));
+			int skillId;
+			for (int j = 0; j < tailleSGC; ++j){
+				f >> skillId;
+				company.addSkill(skillId);
 			}
-			company.addGroupSkills(groupC);
-			companies_.push_back(company);
-
 		}
-
 
 		/*Reading Schools*/
 		string nameS, nameGS, nameSGS;
