@@ -12,21 +12,23 @@ class School {
 		Point position_;
 		vector<Level> levels_;
 	public:
+	 	School();
+	 	School(string name, int, int);
+		~School();
+
 	 	string getName();
 	 	void setName(string name);
+
 		Point& getPosition();
-		void addLevel(Level l);
+		
+		int addLevel(int, int, double, bool, double, int, int);
 		vector<Level>& getLevels();
+		Level& getLevel(int);
+		bool addSkillToLevel(int, int);
+
 	 	string toString();
-	 	School(string name, Point position);
-	 	School();
-		~School();
 	// 	School(const School &s);
 	// 	void setLevels(vector<Level> levels);
 	// 	School& operator=(const School &s); 
-
-		
-
-	
 };
 #endif

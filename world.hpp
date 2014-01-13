@@ -11,16 +11,16 @@ class World {
 private:
 	vector<Company> companies_;
 	vector<School> schools_;
-
-public:
-	string toString();
-	void addSchool(School school);
-	void addCompany(Company company);
-	World();
-	~World();
+public:	
+	int addSchool(string, int = 0, int = 0);
+	School& getSchool(int); 
+	int addCompany(Company company);
 	//World(const World &s);
 	//World& operator=(const World &s); 
 
+	World();
+	~World();
+	string toString();
 	void save();
 	void load();	
 };

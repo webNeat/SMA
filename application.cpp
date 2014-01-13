@@ -1,143 +1,79 @@
 #include "application.hpp"
 
-vector<Skill> Application::skills_;
-vector<SkillGroup> Application::skillsGroups_;
-map<string,double> Application::params_;
 World Application::currentWorld_;
+map<string,double> Application::params_;
+vector<Skill> Application::skills_;
+map<string, SkillGroup> Application::skillGroups_;
 
-void Application::addParams(string key, double value){
+void Application::addParam(string key, double value){
 	params_.insert(pair<string, double>(key,value));
 }
-int Application::addSkill(Skill& l){
-	skills_.push_back(l);
-	return skills_.size()-1;
-}
-SkillGroup& Application::makeSkillGroup(string name){
-	SkillGroup group;
-	group.name_  = name;
-	skillsGroups_.push_back(group);
-	return skillsGroups_.back();
-}
 
-
-void Application::addSkillToGroup(int id, SkillGroup& groupe){
-
-	groupe.skills_.push_back(id);
-}
 map<string, double>& Application::getParams(){
 	return params_;
 }
-void Application::addWorld(World& world){
-	currentWorld_ = world;
-}
-string Application::toString(){
-	stringstream ss;
-	ss << "Application :" << endl;
-	ss << "Skills :" << endl;
-	for (int i = 0; i < skills_.size(); ++i)
-	{
-		ss << "skill name: " << skills_[i].name_ << endl;
-	}
-	ss << "Group Skills : " << endl;
-	for (int i = 0; i < skillsGroups_.size(); ++i)
-	{
-		ss << "Group name : " << skillsGroups_[i].name_<< endl;
-		for (int j = 0; j < skillsGroups_[i].skills_.size(); ++j)
-		{
-			ss << "\t Skill name : " << skills_[skillsGroups_[i].skills_[j]].name_<< endl;
-			
+
+void Application::saveParams(){
+	ofstream f;
+	f.open("files/params.sdb");
+	if(f){
+		f << params_.size() << endl;
+		for (map<string,double>::iterator it = params_.begin(); it != params_.end(); ++it){
+			string s = it -> first;
+			f << strReplace(s,' ', '#') << " " << it->second << endl;
 		}
+		f.close();
+	}else{
+		cerr << "Impossible d'ouvrir le fichier !!" << endl;
 	}
-	ss << "Params Configuration :" << endl;
-	for (map<string, double>::iterator it = params_.begin(); it!= params_.end(); ++it){
-		ss << it->first << " => " << it->second << endl;
-	}
-	ss << currentWorld_.toString();
-
-	return ss.str();
 }
 
-void Application::init(){
-	/*Remplir Params Configuration*/
-	for (int i = 0; i < 10; ++i){
-		stringstream ss;
-		ss << "succes pourcentage " << i;
-		//params_.insert(pair<string, double>(,(i*2.0)/1.5));
-		addParams(ss.str(), (i*2.0)/1.5);
+void Application::loadParams(){
+	ifstream f;
+	string key;
+	double value;
+	int taille;
+	f.open("files/params.sdb");
+	if(f){
+		f >> taille;
+		for (int i = 0; i < taille; ++i){
+			f >> key;
+			strReplace(key,'#', ' ');
+			f >> value;
+			addParam(key, value);
+		}
+		f.close();
+	}else{
+		cerr << "Impossible d'ouvrir le fichier !!" << endl;
+
 	}
-		
-	/*Remplir SKILLS*/
-	Skill skill1,skill2,skill3,skill4;
-	
-	skill1.name_ = "C++";
-	skill2.name_ = "Java";
-	skill3.name_ = "PHP";
-	skill4.name_ = "Biologie";
+}
 
-	int id1 = addSkill(skill1);
-	int id2 = addSkill(skill2);
-	int id3= addSkill(skill3);
-	int id4 = addSkill(skill4);
+int Application::addSkill(string name){
+	Skill skill;
+	skill.name_ = name;
+	skills_.push_back(skill);
+	return skills_.size() - 1;
+}
 
+const vector<Skill>& Application::getSkills(){
+	return skills_;
+}
 
-	
-	/*Remplir Group SKILLS*/
-
-
-	SkillGroup& group1 = makeSkillGroup("Informatique");
-	addSkillToGroup(id1,group1);
-	addSkillToGroup(id2,group1);
-	addSkillToGroup(id3,group1);
-	
-	// group1.name_ = "Informatique";
-	// group1.skills_.push_back();
-	// group1.skills_.push_back(&skills_.at(id2));
-	// group1.skills_.push_back(&skills_.at(id3));
-	
-	//skillsGroups_.push_back(group1);
-
-	SkillGroup& group2 = makeSkillGroup("Medcine");
-	addSkillToGroup(id4,group2);
-
-
-	/*Remplir Schools*/
-	Point position(10,10);
-	School school("ISIMA", position);
-	cout << "before affectation" << endl;
-	SkillGroup group3 = group1;
-	cout << "before Construct" << endl;
-	Level level1(1,100, group3, 70.78, true, 2, 7, 9);
-	cout << "before Construct" << endl;
-//	Level level2(2,200, group3, 60, true, 5, 4, 9);
-	//school.addLevel(level1);
-	// school.addLevel(level2);
-	// currentWorld_.addSchool(school);
-
-	/*Remplir Compnies*/
-
-	// Company company("ATOS");
-	// company.addGroupSkills(group1);
-	// currentWorld_.addCompany(company);
-	
-	// SkillGroup group2;
-	// group2.name_ = "Medcine";
-	// group2.skills_.push_back(&skills_.at(id4));
-	//skillsGroups_.push_back(group2);
-
+Skill& Application::getSkill(int skillId){
+	// check if it exists !!
+	return skills_.at(skillId);
 }
 
 void Application::saveSkills(){
 	ofstream f;
 	f.open("files/skills.sdb");
 	if(f){
-		for (int i = 0; i < skills_.size(); ++i)
-		{
+		for (int i = 0; i < skills_.size(); ++i){
 			f << skills_.at(i).name_ << endl;
 		}
 		f.close();
-
-	}	
-	else{
+	}else{
 		cerr << "Impossible d'ouvrir le fichier !!" << endl;
 	}
 }
@@ -156,85 +92,54 @@ void Application::loadSkills(){
 			getline(f,s);
 		}
 		f.close();
-	}
-	else{
+	}else{
 		cerr << "Impossible d'ouvrir le fichier !!" << endl;
-
 	}
-
 }
 
 
-
-void Application::saveParams(){
-	ofstream f;
-	f.open("files/params.sdb");
-	if(f){
-		f << params_.size() << endl;
-		for (map<string,double>::iterator it = params_.begin(); it != params_.end(); ++it)
-		{
-			string s = it -> first;
-			f << strReplace(s,' ', '#') << " " << it->second << endl;
-		}
-		f.close();
-
-	}	
-	else{
-		cerr << "Impossible d'ouvrir le fichier !!" << endl;
-	}	
+bool Application::addSkillGroup(string name){
+	SkillGroup group;
+	group.name_  = name;
+	if(skillGroups_.find(name) != skillGroups_.end()){
+		return false;
+	}
+	skillGroups_.insert(pair<string, SkillGroup>(name, group));
+	return true;
 }
 
-void Application::loadParams(){
-	ifstream f;
-	string key;
-	double value;
-	int taille;
-	f.open("files/params.sdb");
-	if(f){
-		f >> taille;
-		for (int i = 0; i < taille; ++i)
-		{
-			f >> key;
-			strReplace(key,'#', ' ');
-			f >> value;
-			addParams(key, value);
-		}
-		f.close();
+bool Application::addSkillToGroup(int skillId, string groupName){
+	map<string, SkillGroup>::iterator it = skillGroups_.find(groupName);
+	bool success = false;
+	if(it != skillGroups_.end()){
+		it->second.skills_.push_back(skillId);
+		success = true;
 	}
-	else{
-		cerr << "Impossible d'ouvrir le fichier !!" << endl;
-
-	}
-
-
+	return success;
 }
 
 void Application::saveGroupSkills(){
 	ofstream f;
 	f.open("files/groupskills.sdb");
 	if(f){
-		int tailleG = skillsGroups_.size();
-		f << tailleG << endl;
-		for (int i = 0; i < tailleG; ++i)
-		{
-			f << strReplace(skillsGroups_.at(i).name_, ' ', '#') << " ";
-			int tailleS = skillsGroups_.at(i).skills_.size();
-			f << tailleS << " ";
-			for (int j = 0; j < tailleS ; ++j)
-			{
-				f << skillsGroups_.at(i).skills_.at(j) << " ";
+		f << skillGroups_.size() << endl;
+		map<string, SkillGroup>::iterator groupsIt = skillGroups_.begin();
+		vector<int>::iterator skillsIt;
+		while(groupsIt != skillGroups_.end()){
+			f << strReplace(groupsIt->second.name_, ' ', '#') << " "
+			  << groupsIt->second.skills_.size();
+			skillsIt = groupsIt->second.skills_.begin();
+			while(skillsIt != groupsIt->second.skills_.end()){
+				f << " " << (* skillsIt);
+				skillsIt ++;
 			}
 			f << endl;
-
+			groupsIt ++;
 		}
 		f.close();
-
-	}	
-	else{
+	}else{
 		cerr << "Impossible d'ouvrir le fichier !!" << endl;
-	}	
-
-
+	}
 }
 
 void Application::loadGroupSkills(){
@@ -245,35 +150,111 @@ void Application::loadGroupSkills(){
 	f.open("files/groupskills.sdb");
 	if(f){
 		f >> tailleG;
-		for (int i = 0; i < tailleG; ++i)
-		{
+		for (int i = 0; i < tailleG; ++i){
 			f >> nameG;
 			f >> strReplace(nameG, '#', ' ');
-			SkillGroup& group = makeSkillGroup(nameG);
+			addSkillGroup(nameG);
 			f >> tailleS;
-			for (int j = 0; j < tailleS; ++j)
-			{
+			for (int j = 0; j < tailleS; ++j){
 				f >> id;
-				addSkillToGroup(id, group); 
+				addSkillToGroup(id, nameG); 
 			}
 		}
 		f.close();
-
-	}
-	else{
+	}else{
 		cerr << "Impossible d'ouvrir le fichier !!" << endl;
-	}	
-
+	}
 }
 
-vector<Skill>& Application::getSkills(){
-	return skills_;
-}
 
+void Application::addWorld(World& world){
+	currentWorld_ = world;
+}
 void Application::saveWorld(){
 	currentWorld_.save();
 }
-
 void Application::loadWorld(){
 	currentWorld_.load();
+}
+
+void Application::init(){
+	loadParams();
+	loadSkills();
+	loadGroupSkills();
+	loadWorld();
+	// /* Remplir Params Configuration */
+	// for (int i = 0; i < 10; ++i){
+	// 	stringstream ss;
+	// 	ss << "succes pourcentage " << i;
+	// 	addParam( ss.str(), ( i * 2.0 ) / 1.5 );
+	// }		
+	// /* Remplir Skills */
+	// int id1 = addSkill("C++");
+	// int id2 = addSkill("Java");
+	// int id3 = addSkill("PHP");
+	// int id4 = addSkill("Biologie");
+
+	// /*Remplir Group SKILLS*/
+	// addSkillGroup("Informatique");
+	// addSkillToGroup(id1, "Informatique");
+	// addSkillToGroup(id2, "Informatique");
+	// addSkillToGroup(id3, "Informatique");
+	
+	// //skillGroups_.push_back(group1);
+	// addSkillGroup("Medcine");
+	// addSkillToGroup(id4, "Medcine");
+
+	// /*Remplir Schools*/
+	// int isimaId = currentWorld_.addSchool("ISIMA", 10, 10);
+	// School& isima = currentWorld_.getSchool(isimaId);
+	// int levelId = isima.addLevel(1, 100, 70.78, true, 2, 7, 9);
+	// isima.addSkillToLevel(id1, levelId);
+	// isima.addSkillToLevel(id2, levelId);
+	// isima.addSkillToLevel(id3, levelId);
+
+//	Level level2(2,200, group3, 60, true, 5, 4, 9);
+	//school.addLevel(level1);
+	// school.addLevel(level2);
+	// currentWorld_.addSchool(school);
+
+	/*Remplir Compnies*/
+
+	// Company company("ATOS");
+	// company.addGroupSkills(group1);
+	// currentWorld_.addCompany(company);
+	
+	// SkillGroup group2;
+	// group2.name_ = "Medcine";
+	// group2.skills_.push_back(&skills_.at(id4));
+	//skillGroups_.push_back(group2);
+
+}
+
+string Application::toString(){
+	stringstream ss;
+	ss << "Application :" << endl;
+	ss << "Skills :" << endl;
+	for (int i = 0; i < skills_.size(); ++i){
+		ss << "skill name: " << skills_[i].name_ << endl;
+	}
+	ss << "Group Skills : " << endl;
+
+	map<string, SkillGroup>::iterator groupsIt = skillGroups_.begin();
+	vector<int>::iterator skillsIt;
+	while(groupsIt != skillGroups_.end()){
+		ss <<  "Group name : " << groupsIt->first << endl;
+		skillsIt = groupsIt->second.skills_.begin();
+		while(skillsIt != groupsIt->second.skills_.end()){
+			ss << "\tSKILL name : " << skills_.at(* skillsIt).name_ << endl;
+			skillsIt ++;
+		}
+		groupsIt ++;
+	}
+
+	ss << "Params Configuration :" << endl;
+	for (map<string, double>::iterator it = params_.begin(); it!= params_.end(); ++it){
+		ss << it->first << " => " << it->second << endl;
+	}
+	ss << currentWorld_.toString();
+	return ss.str();
 }

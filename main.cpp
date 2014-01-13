@@ -3,11 +3,7 @@
 #include "application.hpp"
 int main(int, char**){
 	Application::init();
-	// Application::saveParams();
-	// Application::saveSkills();
-	// Application::saveGroupSkills();
-	// Application::saveWorld();
-
+	cout << Application::toString();
 	// /*Remplir Params Configuration*/
 	// for (int i = 0; i < 10; ++i){
 	// 	stringstream ss;
