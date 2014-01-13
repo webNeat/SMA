@@ -9,21 +9,16 @@
 using namespace std;
 class World {
 private:
-	vector<Company> companies_;
-	vector<School> schools_;
+	static vector<Company> companies_;
+	static vector<School> schools_;
 public:	
-	int addSchool(string, int = 0, int = 0);
-	School& getSchool(int);
-
-	int addCompany(string name);
-	Company& getCompany(int);
-	//World(const World &s);
-	//World& operator=(const World &s); 
-
-	World();
-	~World();
-	string toString();
-	void save();
-	void load();	
+	static int addSchool(string, int = 0, int = 0);
+	static School& getSchool(int);
+	static int addCompany(string name);
+	static Company& getCompany(int);
+	static string toString();
+	static void save();
+	static void load();	
+	static void clear();
 };
 #endif

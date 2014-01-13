@@ -1,6 +1,5 @@
 #include "application.hpp"
 
-World Application::currentWorld_;
 map<string,double> Application::params_;
 vector<Skill> Application::skills_;
 map<string, SkillGroup> Application::skillGroups_;
@@ -167,21 +166,12 @@ void Application::loadGroupSkills(){
 }
 
 
-void Application::addWorld(World& world){
-	currentWorld_ = world;
-}
-void Application::saveWorld(){
-	currentWorld_.save();
-}
-void Application::loadWorld(){
-	currentWorld_.load();
-}
 
 void Application::init(){
 	loadParams();
 	loadSkills();
 	loadGroupSkills();
-	loadWorld();
+	World::load();
 }
 
 string Application::toString(){
@@ -209,6 +199,6 @@ string Application::toString(){
 	for (map<string, double>::iterator it = params_.begin(); it!= params_.end(); ++it){
 		ss << it->first << " => " << it->second << endl;
 	}
-	ss << currentWorld_.toString();
+	ss << World::toString();
 	return ss.str();
 }
