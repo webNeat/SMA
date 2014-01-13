@@ -13,30 +13,35 @@ using namespace std;
 
 class Application {
 private:
-	static vector<Skill> skills_;
-	static vector<SkillGroup> skillsGroups_;
-	static map<string,double> params_;
 	static World currentWorld_;
-	// Interface interface_;
-	// EventHandler event_;
+	static vector<Skill> skills_;
+	static map<string, SkillGroup> skillGroups_;
+	static map<string, double> params_;
 public:
-	static void addParams(string key, double value);
-	static int addSkill(Skill& l);
- 	static SkillGroup makeSkillGroup(string name);
- 	static void addSkillToGroup(int, SkillGroup& groupe);
+	static void addParam(string key, double value);
  	static map<string, double>& getParams();
- 	static void addWorld(World& world);
- 	static string toString();
-	static void init();
-	static void run();
 	static void saveParams();
 	static void loadParams();
+	
+	static int addSkill(string name);
+	static const vector<Skill>& getSkills();
+	static Skill& getSkill(int);
 	static void saveSkills();
 	static void loadSkills();
+
+ 	static bool addSkillGroup(string name); 
+ 	// returns false if group already exists
+ 	static bool addSkillToGroup(int, string);
+ 	// return false if no group with the given name
 	static void saveGroupSkills();
 	static void loadGroupSkills();
-	static vector<Skill>& getSkills();
+ 	
+ 	static void addWorld(World& world);
 	static void saveWorld();
 	static void loadWorld();
+
+	static void init();
+	static void run();
+ 	static string toString();
 };
 #endif

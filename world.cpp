@@ -1,17 +1,31 @@
 #include "application.hpp"
 #include "world.hpp"
-World::World(){
 
-}
-World::~World(){
+World::World(){}
 
-}
-void World::addSchool(School school){
+World::~World(){}
+
+int World::addSchool(string name, int x, int y){
+	// check if there is no school with the same name !
+	School school(name, x, y);
 	schools_.push_back(school);
+	return schools_.size() - 1;
 }
 
-void World::addCompany(Company company){
+School& World::getSchool(int schoolId){
+	// if(schoolId < schools_.size())
+	return schools_.at(schoolId);
+}
+
+int World::addCompany(string name){
+	Company company(name);
 	companies_.push_back(company);
+	return companies_.size() - 1;
+}
+
+Company& World::getCompany(int companyId){
+	// if(companyId < companies_.size())
+	return companies_.at(companyId);
 }
 
 string World::toString(){
@@ -40,25 +54,17 @@ void World::save(){
 	if(f){
 		/*Writing Companies*/
 		tailleC =  companies_.size();
-		
 		f << tailleC << endl;
-		for (int i = 0; i < tailleC; ++i)
-		{
+		for (int i = 0; i < tailleC; ++i){
 			string s = companies_.at(i).getName();
 			f << strReplace(s,' ','#') << " ";
-			s = companies_.at(i).getGroup().name_;
-			f << strReplace(s,' ', '#') << " ";
-			tailleGC = companies_.at(i).getGroup().skills_.size();
+			tailleGC = companies_.at(i).getSkills().size();
 			f << tailleGC << " " ;
-			for (int j = 0; j < tailleGC; ++j)
-			{
-				string s = Application::getSkills().at(companies_.at(i).getGroup().skills_.at(j)).name_;
-				f << strReplace(s,' ', '#') << " ";
+			for (int j = 0; j < tailleGC; ++j){
+				f << companies_.at(i).getSkills().at(j) << " ";
 			}
 			f << endl;
-
 		}
-
 		/*Writing Schools*/
 		string nameGL; 
 		tailleS = schools_.size();
@@ -74,30 +80,22 @@ void World::save(){
 			 {
 			 	f << schools_.at(i).getLevels().at(j).getId() << " ";
 			 	f << schools_.at(i).getLevels().at(j).getstudentNumber() << " ";
-			 	nameGL = schools_.at(i).getLevels().at(j).getSkillGroup().name_;
-			 	f << strReplace(nameGL, ' ', '#') << " ";
-			 	tailleSGL = schools_.at(i).getLevels().at(j).getSkillGroup().skills_.size();
-			 	f << tailleSGL << " ";
-			 	for (int k = 0; k < tailleSGL; ++k)
-			 	{	string nameSGL = Application::getSkills().at(schools_.at(i).getLevels().at(j).getSkillGroup().skills_.at(k)).name_;
-			 		f << strReplace(nameSGL, ' ', '#') << " ";
-			 	}
-
-
 			 	f << schools_.at(i).getLevels().at(j).getSuccessPercentage() << " ";
 			 	f << schools_.at(i).getLevels().at(j).getHasInternship() << " ";
 			 	f << schools_.at(i).getLevels().at(j).getInternshipDuration() << " ";
 			 	f << schools_.at(i).getLevels().at(j).getInternshipStart() << " ";
 			 	f << schools_.at(i).getLevels().at(j).getInternshipEnd() << " ";
 			 	
-
-
-			 }
-			 f << endl;
-
-
+			 	tailleSGL = schools_.at(i).getLevels().at(j).getSkillGroup().skills_.size();
+			 	f << tailleSGL << " ";
+			 	for (int k = 0; k < tailleSGL; ++k)
+			 	{	
+			 		int skillId = schools_.at(i).getLevels().at(j).getSkillGroup().skills_.at(k);
+			 		f << skillId << " ";
+			 	}
+			}
+			f << endl;
 		}
-
 	f.close();
 	}
 	else{
@@ -116,25 +114,16 @@ void World::load(){
 	if(f){
 		/*Reading Compnies*/
 		f >> tailleC;
-		for (int i = 0; i < tailleC; ++i)
-		{
+		for (int i = 0; i < tailleC; ++i){
 			f >> nameC; 
-			Company company(strReplace(nameC,'#',' '));
-			f >> nameGC;
-			groupC.name_ = nameGC;
+			Company& company = getCompany(addCompany(nameC));
 			f >> tailleSGC;
-			for (int j = 0; j < tailleSGC; ++j)
-			{
-				f >> nameSGC;
-				skill.name_ = strReplace(nameSGC,'#', ' ');
-				groupC.skills_.push_back(Application::addSkill(skill));
-
+			int skillId;
+			for (int j = 0; j < tailleSGC; ++j){
+				f >> skillId;
+				company.addSkill(skillId);
 			}
-			company.addGroupSkills(groupC);
-			companies_.push_back(company);
-
 		}
-
 
 		/*Reading Schools*/
 		string nameS, nameGS, nameSGS;
@@ -146,41 +135,30 @@ void World::load(){
 		f >> tailleS;
 		for (int i = 0; i < tailleS; ++i)
 		{
-
 			f >> nameS;
 			f >> x;
 			f >> y;
-			Point position(x, y);
-			School school(strReplace(nameS, '#', ' '),position);
+			School& school = getSchool(addSchool(nameS, x, y));
 			f >> tailleLS;
-
 			for (int j = 0; j < tailleLS; ++j)
 			{
 				f >> id;
 				f >> studentNumber;
-				f >> nameGS;
-				groupLS.name_ = strReplace(nameGS, '#', ' ');
-
-				f >> tailleSGS;
-				for (int k = 0; k < tailleSGS; ++k)
-				{
-					f >> nameSGS;
-					
-					skill2.name_ = strReplace(nameSGS, '#', ' ');
-					groupLS.skills_.push_back(Application::addSkill(skill2));
-				
-				}
-
 				f >> successPercentage;
 				f >> hasInternship;
 				f >> internshipDuration;
 				f >> internshipStart;
 				f >> internshipEnd;
-				Level level(id, studentNumber, groupLS, successPercentage, hasInternship,  internshipDuration, internshipStart, internshipEnd);
-				school.addLevel(level);
-			}
-			schools_.push_back(school);
 
+				int levelId = school.addLevel(id, studentNumber, successPercentage, hasInternship,  internshipDuration, internshipStart, internshipEnd);
+
+				f >> tailleSGS;
+				int skillId;
+				for (int k = 0; k < tailleSGS; ++k){
+					f >> skillId;
+					school.addSkillToLevel(skillId, levelId);
+				}
+			}
 		}
 		f.close();
 	}

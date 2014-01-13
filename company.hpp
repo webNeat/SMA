@@ -5,30 +5,27 @@
 #include <vector>
 using namespace std;
 class Company {
+private:
+	string name_;
+	vector<int> skills_;
+	//vector<Level> levels_;
+public:
+ 	Company();
+ 	Company(string name);
+ 	~Company();
 	
-	private:
-		string name_;
-		SkillGroup group_;
-		//vector<Level> levels_;
-	public:
-		string getName();
-	 	void setName(string name);
-	 	SkillGroup& getGroup();
-	 	//void addLevel(Level l);
-	 	void addGroupSkills(SkillGroup& groupe);
-	 	string toString();
-	 	Company();
-	 //	Company(string name, vector<Level> levels);
-	 	Company(string name);
+	string getName();
+ 	void setName(string name);
 
-	 	~Company();
-		//vector<Level>& getLevels();
-	// 	void setLevels(vector<Level> levels);
-	// 	Company(const Company &s);
-	// 	Company& operator=(const Company &s); 
+ 	bool addSkill(int);
+ 	vector<int>& getSkills();
+ 	
+ 	string toString();
+ //	Company(string name, vector<Level> levels);
 
-		
-
-	
+	//vector<Level>& getLevels();
+// 	void setLevels(vector<Level> levels);
+// 	Company(const Company &s);
+// 	Company& operator=(const Company &s); 
 };
 #endif

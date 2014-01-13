@@ -5,13 +5,12 @@
 using namespace std;
 
 typedef struct {
-		string name_;
-	}Skill;
-
+	string name_;
+} Skill;
 
 typedef struct {
-		string name_;
-		vector<int> skills_; 
-	}SkillGroup;
+	string name_;
+	vector<int> skills_;
+} SkillGroup;
 
 #endif
