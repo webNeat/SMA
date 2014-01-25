@@ -1,8 +1,8 @@
 #include <iostream>
-#include <sstream>
-#include "application.hpp"
+#include "controller.hpp"
+#include "controller.hpp"
+#include "file.hpp"
 int main(int, char**){
-	Application::init();
-	cout << Application::toString();
+	Controller::start();
 	return 0;
 }

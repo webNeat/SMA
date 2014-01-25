@@ -13,4 +13,11 @@ typedef struct {
 	vector<int> skills_;
 } SkillGroup;
 
+typedef enum {
+	STUDENT,
+	LAUREAT,
+	COMPANY,
+	SCHOOL
+} AgentType;
+
 #endif
