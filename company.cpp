@@ -5,29 +5,14 @@ Company::Company(string name) : Agent(COMPANY) {
 }
 Company::~Company(){}
 
-void Company::setId(int id){
-	id_ = id;
-}
 
-int Company::getId(){
-	return id_;
-}
-
-string Company::getName(){
-	return name_;
-}
-void Company::setName(string name){
-	name_ = name;
-}
 
 bool Company::addSkill(int skillId){
 	// check if it's already there !
 	skills_.push_back(skillId);
 	return true;
 }
-vector<int>& Company::getSkills(){
-	return skills_;
-}
+
 
 string Company::toString(){
 	stringstream ss;

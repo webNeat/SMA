@@ -26,6 +26,7 @@ public:
 	void setId(int);
 	int getstudentNumber();
 	vector<int>& getSkills();
+	vector<int>& getstudentIds();
 	double getSuccessPercentage();
 	bool getHasInternship();
 	double getInternshipDuration();

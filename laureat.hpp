@@ -13,5 +13,20 @@ private:
 public:
 	Laureat(int);
 	void act();
+
+	int getSchoolId(){
+		return schoolId_;
+	};
+	
+	vector<int>& getSkills(){
+		return skills_;
+	};
+	vector<int>& getInternShips(){
+		return internships_;
+	};
+	int getCurrentCompanypId(){
+		return currentCompanyId_;
+	};
+
 };
 #endif

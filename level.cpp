@@ -30,6 +30,9 @@ int Level::getstudentNumber(){
 vector<int>& Level::getSkills(){
 	return skills_;
 }
+vector<int>& Level::getstudentIds(){
+	return studentIds_;
+}
 double Level::getSuccessPercentage(){
 	return successPercentage_;
 }

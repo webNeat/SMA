@@ -20,16 +20,27 @@ public:
  	School();
  	School(string name, double, double, int = 0, int = 0);
 	~School();
+	
+	int getId(){
+		return id_;
+	};
 
-	void setId(int);
-	int getId();
- 	string getName();
- 	void setName(string name);
+ 	string getName(){
+ 		return name_;
+ 	};
 
-	Point& getPosition();
+	Point& getPosition(){
+		return position_;
+	};
+	vector<Level>& getLevels(){
+		return levels_;
+	};
+	vector<int>& getLaureatIds(){
+		return laureatIds_;
+	};
+
 	
 	int addLevel(int, double, bool, double, int, int);
-	vector<Level>& getLevels();
 	Level& getLevel(int);
 	bool addSkillToLevel(int, int);
 
