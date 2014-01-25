@@ -1,12 +1,16 @@
 #include "school.hpp"
 
-School::School(){}
-School::School(string name, int x, int y){
-	Point position(x, y);
-	name_ = name;
-	position_ = position;
-}
+School::School(string name, double average, double ecart, int x, int y) 
+	: Agent(SCHOOL), name_(name), position_(x,y), studentsArrivingNumber_(average, ecart) {}
 School::~School(){}
+
+void School::setId(int id){
+	id_ = id;
+}
+
+int School::getId(){
+	return id_;
+}
 
 string School::getName(){
 	return name_;
@@ -19,10 +23,12 @@ Point& School::getPosition(){
 	return position_;
 }
 
-int School::addLevel(int id, int studentNumber, double successPercentage, bool hasInternship, double internshipDuration, int internshipStart, int internshipEnd){
-	Level level(id, studentNumber, successPercentage, hasInternship, internshipDuration, internshipStart, internshipEnd);
+int School::addLevel(int studentNumber, double successPercentage, bool hasInternship, double internshipDuration, int internshipStart, int internshipEnd){
+	Level level(studentNumber, successPercentage, hasInternship, internshipDuration, internshipStart, internshipEnd);
 	levels_.push_back(level);
-	return levels_.size() - 1;
+	int id = levels_.size() - 1;
+	levels_.at(id).setId(id);
+	return id;
 }
 Level& School::getLevel(int levelId){
 	return levels_.at(levelId);
@@ -37,6 +43,10 @@ bool School::addSkillToLevel(int skillId, int levelId){
 	return true;
 }
 
+void School::addStudent(int id){
+	// studentIds_.push_back(id);
+}
+
 string School::toString(){
 	stringstream ss;
 
@@ -46,4 +56,12 @@ string School::toString(){
 		ss << levels_[i].toString();
 	}
 	return ss.str();
+}
+
+void School::act(){
+	// TODO
+}
+
+void School::print(){
+	
 }

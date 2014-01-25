@@ -3,50 +3,53 @@
 map<string,double> Application::params_;
 vector<Skill> Application::skills_;
 map<string, SkillGroup> Application::skillGroups_;
+Uniforme Application::uniforme;
+Bernoulli Application::bernoulli;
 
 void Application::addParam(string key, double value){
 	params_.insert(pair<string, double>(key,value));
 }
 
-map<string, double>& Application::getParams(){
-	return params_;
-}
+// map<string, double>& Application::getParams(){
+// 	return params_;
+// }
 
-void Application::saveParams(){
-	ofstream f;
-	f.open("files/params.sdb");
-	if(f){
-		f << params_.size() << endl;
-		for (map<string,double>::iterator it = params_.begin(); it != params_.end(); ++it){
-			string s = it -> first;
-			f << strReplace(s,' ', '#') << " " << it->second << endl;
-		}
-		f.close();
-	}else{
-		cerr << "Impossible d'ouvrir le fichier !!" << endl;
-	}
-}
+// void Application::saveParams(){
+// 	ofstream f;
+// 	f.open("files/params.sdb");
+// 	if(f){
+// 		f << params_.size() << endl;
+// 		for (map<string,double>::iterator it = params_.begin(); it != params_.end(); ++it){
+// 			string s = it -> first;
+// 			f << strReplace(s,' ', '#') << " " << it->second << endl;
+// 		}
+// 		f.close();
+// 	}else{
+// 		cerr << "Impossible d'ouvrir le fichier !!" << endl;
+// 	}
+// }
 
-void Application::loadParams(){
-	ifstream f;
-	string key;
-	double value;
-	int taille;
-	f.open("files/params.sdb");
-	if(f){
-		f >> taille;
-		for (int i = 0; i < taille; ++i){
-			f >> key;
-			strReplace(key,'#', ' ');
-			f >> value;
-			addParam(key, value);
-		}
-		f.close();
-	}else{
-		cerr << "Impossible d'ouvrir le fichier !!" << endl;
+// void Application::loadParams(){
+// 	ifstream f;
+// 	string key;
+// 	double value;
+// 	int taille;
+// 	params_.clear();
+// 	f.open("files/params.sdb");
+// 	if(f){
+// 		f >> taille;
+// 		for (int i = 0; i < taille; ++i){
+// 			f >> key;
+// 			strReplace(key,'#', ' ');
+// 			f >> value;
+// 			addParam(key, value);
+// 		}
+// 		f.close();
+// 	}else{
+// 		cerr << "Impossible d'ouvrir le fichier !!" << endl;
 
-	}
-}
+// 	}
+// }
 
 int Application::addSkill(string name){
 	Skill skill;
@@ -168,10 +171,16 @@ void Application::loadGroupSkills(){
 
 
 void Application::init(){
-	loadParams();
 	loadSkills();
 	loadGroupSkills();
-	World::load();
+}
+
+void Application::printParams(){
+	map<string, double>::iterator it = params_.begin();
+	while(it != params_.end()){
+		cout << "\t" << it->first << " : " << it->second << endl;
+		it++;
+	}
 }
 
 string Application::toString(){
@@ -201,4 +210,9 @@ string Application::toString(){
 	}
 	ss << World::toString();
 	return ss.str();
+}
+
+void Application::act(){
+	World::act();
+	World::save();
 }

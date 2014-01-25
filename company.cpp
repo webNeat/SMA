@@ -1,10 +1,17 @@
 #include "application.hpp"
-#include "company.hpp"
-Company::Company(){}
-Company::Company(string name){
+Company::Company() : Agent(COMPANY) {}
+Company::Company(string name) : Agent(COMPANY) {
 	name_ = name;
 }
 Company::~Company(){}
+
+void Company::setId(int id){
+	id_ = id;
+}
+
+int Company::getId(){
+	return id_;
+}
 
 string Company::getName(){
 	return name_;
@@ -36,4 +43,8 @@ string Company::toString(){
 		
 	}
 	return ss.str();
+}
+
+void Company::act(){
+	// TODO
 }

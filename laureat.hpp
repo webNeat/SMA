@@ -1,18 +1,17 @@
-#ifndef STUDENT_HPP
-#define STUDENT_HPP
+#ifndef Laureat_HPP
+#define Laureat_HPP
 #include <vector>
 #include "agent.hpp"
 using namespace std;
 
-class Student : Agent {
+class Laureat : Agent {
 private:
 	int schoolId_;
-	int levelId_;
 	vector<int> skills_;
 	vector<int> internships_;
-	int currentIntershipId_;
+	int currentCompanyId_;
 public:
-	Student(int, int = 0);
+	Laureat(int);
 	void act();
 };
 #endif

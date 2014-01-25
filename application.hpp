@@ -9,6 +9,7 @@
 #include <fstream>
 #include "lib.hpp"
 #include "world.hpp"
+#include "generators.hpp"
 using namespace std;
 
 class Application {
@@ -16,11 +17,20 @@ private:
 	static vector<Skill> skills_;
 	static map<string, SkillGroup> skillGroups_;
 	static map<string, double> params_;
+
+	static Uniforme uniforme;
+	static Bernoulli bernoulli;
 public:
 	static void addParam(string key, double value);
- 	static map<string, double>& getParams();
-	static void saveParams();
-	static void loadParams();
+ 	static map<string, double>& getParams(){
+ 		return params_;
+ 	};
+ 	static void setParams(map<string, double>& p){
+ 		params_ = p;
+ 	};
+	// static void saveParams();
+	// static void loadParams();
+	static void printParams();
 	
 	static int addSkill(string name);
 	static const vector<Skill>& getSkills();
@@ -36,7 +46,7 @@ public:
 	static void loadGroupSkills();
  	
 	static void init();
-	static void run();
+	static void act();
  	static string toString();
 };
 #endif

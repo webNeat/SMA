@@ -10,21 +10,22 @@ using namespace std;
 class Level {
 private:
 	int id_;
-	int studentNumber_;
-	SkillGroup skillGroup_;
 	double successPercentage_;
 	bool hasInternship_;
 	double internshipDuration_;
 	int internshipStart_;
 	int internshipEnd_;
+	vector<int> skills_;
+	vector<int> studentIds_;
 public:
  	Level();
- 	Level(int, int, double, bool, double, int, int);
+ 	Level(int, double, bool, double, int, int);
  	~Level();
 
 	int getId();
+	void setId(int);
 	int getstudentNumber();
-	SkillGroup& getSkillGroup();
+	vector<int>& getSkills();
 	double getSuccessPercentage();
 	bool getHasInternship();
 	double getInternshipDuration();
@@ -33,6 +34,7 @@ public:
 	string toString();
 
 	void addSkill(int);
+	void addStudent(int);
 	//string toString(ostream& out);
 // 	Level(const Level &l);
 // 	Level& operator=(const Level&l);	

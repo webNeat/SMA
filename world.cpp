@@ -3,12 +3,19 @@
 
 vector<Company> World::companies_;
 vector<School> World::schools_;
+vector<Student> World::students_;
+vector<Laureat> World::laureats_;
+vector<Internship> World::internships_;
+int World::month_ = 9;
 
 int World::addSchool(string name, int x, int y){
 	// check if there is no school with the same name !
 	School school(name, x, y);
 	schools_.push_back(school);
-	return schools_.size() - 1;
+	int id = schools_.size() - 1;
+	schools_.at(id).setId(id);
+	// agents_.push_back(&(schools_.at(id)));
+	return id;
 }
 
 void World::clear(){
@@ -20,10 +27,21 @@ School& World::getSchool(int schoolId){
 	return schools_.at(schoolId);
 }
 
+void World::addStudentToSchool(int schoolId){
+	Student student(schoolId);
+	students_.push_back(student);
+	int id = students_.size() - 1;
+	// agents_.push_back(&(students_.at(id)));
+	schools_.at(schoolId).addStudent(id);
+}
+
 int World::addCompany(string name){
 	Company company(name);
 	companies_.push_back(company);
-	return companies_.size() - 1;
+	int id = companies_.size() - 1;
+	// agents_.push_back(&(companies_.at(id)));
+	companies_.at(id).setId(id);
+	return id;
 }
 
 Company& World::getCompany(int companyId){
@@ -89,11 +107,11 @@ void World::save(){
 			 	f << schools_.at(i).getLevels().at(j).getInternshipStart() << " ";
 			 	f << schools_.at(i).getLevels().at(j).getInternshipEnd() << " ";
 			 	
-			 	tailleSGL = schools_.at(i).getLevels().at(j).getSkillGroup().skills_.size();
+			 	tailleSGL = schools_.at(i).getLevels().at(j).getSkills().size();
 			 	f << tailleSGL << " ";
 			 	for (int k = 0; k < tailleSGL; ++k)
 			 	{	
-			 		int skillId = schools_.at(i).getLevels().at(j).getSkillGroup().skills_.at(k);
+			 		int skillId = schools_.at(i).getLevels().at(j).getSkills().at(k);
 			 		f << skillId << " ";
 			 	}
 			}
@@ -153,7 +171,7 @@ void World::load(){
 				f >> internshipStart;
 				f >> internshipEnd;
 
-				int levelId = school.addLevel(id, studentNumber, successPercentage, hasInternship,  internshipDuration, internshipStart, internshipEnd);
+				int levelId = school.addLevel(id, successPercentage, hasInternship,  internshipDuration, internshipStart, internshipEnd);
 
 				f >> tailleSGS;
 				int skillId;
@@ -169,4 +187,8 @@ void World::load(){
 		cerr << "Impossible d'ouvrir le fichier !!" << endl;
 	}
 
+}
+
+void World::act(){
+	// TODO 
 }
