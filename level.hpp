@@ -19,13 +19,14 @@ private:
 	vector<int> studentIds_;
 public:
  	Level();
- 	Level(int, double, bool, double, int, int);
+ 	Level(double, bool, double, int, int);
  	~Level();
 
 	int getId();
 	void setId(int);
 	int getstudentNumber();
 	vector<int>& getSkills();
+	vector<int>& getstudentIds();
 	double getSuccessPercentage();
 	bool getHasInternship();
 	double getInternshipDuration();

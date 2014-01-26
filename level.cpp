@@ -3,7 +3,7 @@ Level::Level(){
 
 }
 
-Level::Level(int studentNumber, 
+Level::Level(
 		double successPercentage, 
 		bool hasInternship, 
 		double internshipDuration, 
@@ -29,6 +29,9 @@ int Level::getstudentNumber(){
 }
 vector<int>& Level::getSkills(){
 	return skills_;
+}
+vector<int>& Level::getstudentIds(){
+	return studentIds_;
 }
 double Level::getSuccessPercentage(){
 	return successPercentage_;

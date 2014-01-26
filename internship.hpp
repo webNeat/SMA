@@ -11,5 +11,18 @@ private:
 public:
 	Internship(int);
 	void addSkill(int);
+	int getCompanyId(){
+		return companyId_;
+	};
+	int getStudentId(){
+		return studentId_;
+	};
+	vector<int>& getSkills(){
+		return skillIds_;
+	};
+	void setStudentId(int studentId){
+		studentId_ = studentId;
+	};
+
 };
 #endif

@@ -22,7 +22,15 @@ private:
 public:	
 	static int addSchool(string, int = 0, int = 0);
 	static School& getSchool(int);
-	static void addStudentToSchool(int);
+	static int addStudentToSchool(int);
+	static int addStudent(int, int);
+	static int addLaureat(int);
+	static int addInternship(int);
+	
+	static Student& getStudent(int);
+	static Laureat& getLaureat(int);
+	static Internship& getInternship(int);
+	
 	static int addCompany(string name);
 	static Company& getCompany(int);
 	static string toString();
@@ -30,5 +38,44 @@ public:
 	static void load();	
 	static void clear();
 	static void act();
+
+	static int getMonth(){
+		return month_;
+	};
+	static void setMonth(int month){
+		month_ = month;
+	}
+	static vector<Internship>& getInternships(){
+		return internships_;
+	};
+	static vector<Company>& getCompanies(){
+		return companies_;
+	};
+	static vector<School>& getSchools(){
+		return schools_;
+	};
+	static vector<Laureat>& getLaureats(){
+		return laureats_;
+	};
+	static vector<Student>& getStudents(){
+		return students_;
+	};
+
+	static void  setInternships(vector<Internship> interenships){
+		 internships_ = interenships;
+	};
+	static void  setCompanies(vector<Company> companies){
+		 companies_ = companies_;
+	};
+	static void  setSchools(vector<School> schools){
+		 schools_ = schools;
+	};
+	static void  setLaureats(vector<Laureat> laureats){
+		 laureats_ = laureats;
+	};
+	static void setStudents(vector<Student> students){
+		 students_ = students;
+	};
+	
 };
 #endif
