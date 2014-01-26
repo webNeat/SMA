@@ -18,6 +18,25 @@ int World::addSchool(string name, int x, int y){
 	return id;
 }
 
+int World::addStudent(int schoolId, int levelId){
+	Student student(schoolId, levelId);
+	students_.push_back(student);
+	int id = students_.size() - 1;
+	return id;
+}
+
+int World::addLaureat(int schoolId){
+	Laureat laureat(schoolId);
+	laureats_.push_back(laureat);
+	int id = laureats_.size() - 1;
+	return id;
+}
+int World::addInternship(int companyId){
+	Internship internship(companyId);
+	internships_.push_back(internship);
+	int id = internships_.size() - 1;
+	return id;
+}
 void World::clear(){
 	companies_.clear();
 	schools_.clear();
@@ -26,13 +45,24 @@ School& World::getSchool(int schoolId){
 	// if(schoolId < schools_.size())
 	return schools_.at(schoolId);
 }
+Student& World::getStudent(int schoolId){
+	return students_.at(schoolId);
+}
 
-void World::addStudentToSchool(int schoolId){
+Laureat& World::getLaureat(int schoolId){
+	return laureats_.at(schoolId);
+}
+Internship& World::getInternship(int comapnyId){
+	return internships_.at(comapnyId);
+}
+
+int World::addStudentToSchool(int schoolId){
 	Student student(schoolId);
 	students_.push_back(student);
 	int id = students_.size() - 1;
 	// agents_.push_back(&(students_.at(id)));
 	schools_.at(schoolId).addStudent(id);
+	return id;
 }
 
 int World::addCompany(string name){
@@ -171,7 +201,7 @@ void World::load(){
 				f >> internshipStart;
 				f >> internshipEnd;
 
-				int levelId = school.addLevel(id, successPercentage, hasInternship,  internshipDuration, internshipStart, internshipEnd);
+				int levelId = school.addLevel(successPercentage, hasInternship,  internshipDuration, internshipStart, internshipEnd);
 
 				f >> tailleSGS;
 				int skillId;

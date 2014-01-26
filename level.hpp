@@ -19,7 +19,7 @@ private:
 	vector<int> studentIds_;
 public:
  	Level();
- 	Level(int, double, bool, double, int, int);
+ 	Level(double, bool, double, int, int);
  	~Level();
 
 	int getId();

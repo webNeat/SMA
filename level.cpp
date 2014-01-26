@@ -3,7 +3,7 @@ Level::Level(){
 
 }
 
-Level::Level(int studentNumber, 
+Level::Level(
 		double successPercentage, 
 		bool hasInternship, 
 		double internshipDuration, 

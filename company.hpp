@@ -18,7 +18,7 @@ private:
 	int hiredEmployeesNumber_;
 	int retiredEmployeesNumber_;
 	// Probability parametres
-	vector<int> averageInternshipsNumber_;
+	int averageInternshipsNumber_;
 	int averageEmployeesNumber_;
 	int averageHiredLauriasNumber_;
 	// Other parametres
@@ -50,10 +50,10 @@ public:
 		laureatIds_ = laureatIds;
 	};
 
-	vector<int>& getAverageInternshipsNumber(){
+	int getAverageInternshipsNumber(){
 		return averageInternshipsNumber_;
 	};
-	void setAverageInternshipsNumber(vector<int> averageInternshipsNumber){
+	void setAverageInternshipsNumber(int averageInternshipsNumber){
 		averageInternshipsNumber_ = averageInternshipsNumber;
 	};
 
@@ -71,18 +71,18 @@ public:
  		name_ = name;
  	};
 
- 	int getEmployessNumber(){
+ 	int getEmployeesNumber(){
  		return employeesNumber_;
  	};
 
-	void setEmployessNumber(int employeesNumber){
+	void setEmployeesNumber(int employeesNumber){
  		employeesNumber_ = employeesNumber;
  	};
  	
- 	int getIHiredEmployeesNumber(){
+ 	int getHiredEmployeesNumber(){
  		return hiredEmployeesNumber_;
  	};
- 	void setIHiredEmployeesNumber(int hiredEmployeesNumber){
+ 	void setHiredEmployeesNumber(int hiredEmployeesNumber){
  		hiredEmployeesNumber_ = hiredEmployeesNumber;
  	};
  	int getRetiredEmployeesNumber(){

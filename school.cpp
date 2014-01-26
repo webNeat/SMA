@@ -6,8 +6,8 @@ School::~School(){}
 
 
 
-int School::addLevel(int studentNumber, double successPercentage, bool hasInternship, double internshipDuration, int internshipStart, int internshipEnd){
-	Level level(studentNumber, successPercentage, hasInternship, internshipDuration, internshipStart, internshipEnd);
+int School::addLevel(double successPercentage, bool hasInternship, double internshipDuration, int internshipStart, int internshipEnd){
+	Level level(successPercentage, hasInternship, internshipDuration, internshipStart, internshipEnd);
 	levels_.push_back(level);
 	int id = levels_.size() - 1;
 	levels_.at(id).setId(id);

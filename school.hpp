@@ -24,7 +24,9 @@ public:
 	int getId(){
 		return id_;
 	};
-
+	void setId(int id){
+		id_ = id;
+	};
  	string getName(){
  		return name_;
  	};
@@ -40,7 +42,7 @@ public:
 	};
 
 	
-	int addLevel(int, double, bool, double, int, int);
+	int addLevel( double, bool, double, int, int);
 	Level& getLevel(int);
 	bool addSkillToLevel(int, int);
 

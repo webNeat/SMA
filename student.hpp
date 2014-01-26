@@ -30,6 +30,10 @@ public:
 		return currentIntershipId_;
 	};
 
+	void setCurrenInternshipId(int currentID){
+		currentIntershipId_ = currentID;
+	};
+
 	void act();
 };
 #endif

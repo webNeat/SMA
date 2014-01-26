@@ -22,7 +22,15 @@ private:
 public:	
 	static int addSchool(string, int = 0, int = 0);
 	static School& getSchool(int);
-	static void addStudentToSchool(int);
+	static int addStudentToSchool(int);
+	static int addStudent(int, int);
+	static int addLaureat(int);
+	static int addInternship(int);
+	
+	static Student& getStudent(int);
+	static Laureat& getLaureat(int);
+	static Internship& getInternship(int);
+	
 	static int addCompany(string name);
 	static Company& getCompany(int);
 	static string toString();

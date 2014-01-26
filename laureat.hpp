@@ -27,6 +27,9 @@ public:
 	int getCurrentCompanypId(){
 		return currentCompanyId_;
 	};
+	void setCurrentCompanyId(int compnayId){
+		currentCompanyId_ = compnayId;
+	};
 
 };
 #endif
