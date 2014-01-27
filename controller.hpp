@@ -8,14 +8,17 @@ using namespace std;
 
 class Controller {
 private:
-	static ServerSocket server_;
 	static int portNumber_;
+	static string url_;
 public:
 	static int getPortNumber(){
 		return portNumber_;
 	};
 	static void setPortNumber(int pn){
 		portNumber_ = pn;
+	};
+	static void setUrl(string url){
+		url_ = url;
 	};
 	static void start();
 	static string updateParams();

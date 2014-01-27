@@ -5,13 +5,8 @@
 using namespace std;
 
 typedef struct {
-	string name_;
+	string name;
 } Skill;
-
-typedef struct {
-	string name_;
-	vector<int> skills_;
-} SkillGroup;
 
 typedef enum {
 	STUDENT,

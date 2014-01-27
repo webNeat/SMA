@@ -15,7 +15,7 @@ using namespace std;
 class Application {
 private:
 	static vector<Skill> skills_;
-	static map<string, SkillGroup> skillGroups_;
+	static map<string, vector<int> > skillGroups_;
 	static map<string, double> params_;
 
 	static Uniforme uniforme;
@@ -28,25 +28,29 @@ public:
  	static void setParams(map<string, double>& p){
  		params_ = p;
  	};
-	// static void saveParams();
-	// static void loadParams();
 	static void printParams();
 	
 	static int addSkill(string name);
-	static const vector<Skill>& getSkills();
+	static vector<Skill>& getSkills(){
+		return skills_;
+	};
+	static void setSkills(vector<Skill>& s){
+		skills_ = s;
+	}
 	static Skill& getSkill(int);
-	static void saveSkills();
-	static void loadSkills();
 
+	static map<string, vector<int> >& getSkillGroups(){
+		return skillGroups_;
+	}
+	static void setSkillGroups(map<string, vector<int> >& sg){
+		skillGroups_ = sg;
+	}
  	static bool addSkillGroup(string name); 
  	// returns false if group already exists
  	static bool addSkillToGroup(int, string);
  	// return false if no group with the given name
-	static void saveGroupSkills();
-	static void loadGroupSkills();
- 	
-	static void init();
+ 	static void printSkills();
+
 	static void act();
- 	static string toString();
 };
 #endif

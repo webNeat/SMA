@@ -42,11 +42,13 @@ public:
 	};
 
 	
-	int addLevel( double, bool, double, int, int);
+	int addLevel( double, bool, double, int);
 	Level& getLevel(int);
 	bool addSkillToLevel(int, int);
 
-	void addStudent(int);
+	void addStudentToLevel(int, int);
+	void removeStudentFromLevel(int, int);
+	void generateStudents();
 
  	string toString();
  	void act();

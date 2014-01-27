@@ -117,15 +117,7 @@ public:
  	};
 
  	bool addSkill(int);
- 
- 	
- 	string toString();
- 	void act();
- //	Company(string name, vector<Level> levels);
 
-	//vector<Level>& getLevels();
-// 	void setLevels(vector<Level> levels);
-// 	Company(const Company &s);
-// 	Company& operator=(const Company &s); 
+ 	void act();
 };
 #endif

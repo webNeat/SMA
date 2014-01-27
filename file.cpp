@@ -20,6 +20,7 @@ void File::loadConfig(){
 	input.close();
 	json::Object config = json::Deserialize(jsonStr);
 	Controller::setPortNumber(config["portNumber"]);
+	Controller::setUrl(config["url"]);
 }
 
 void File::saveParams(){
@@ -51,6 +52,82 @@ void File::loadParams(){
 		it ++;
 	}
 	Application::setParams(params);
+	Application::printParams();
+}
+
+void File::saveSkills(){
+	json::Array skillsArray;
+	vector<Skill>& skills = Application::getSkills();	
+	vector<Skill>::iterator it = skills.begin();
+	while(it != skills.end()){
+		json::Object skillObject;
+		skillObject["name"] = it->name;
+		skillsArray.push_back(skillObject);
+		it ++;
+	}
+
+	json::Array groupsArray;
+	map<string, vector<int> >& groups = Application::getSkillGroups();
+	map<string, vector<int> >::iterator gIt = groups.begin();
+	while(gIt != groups.end()){
+		json::Object groupObject;
+		groupObject["name"] = gIt->first;
+		json::Array groupSkillsArray;
+		vector<int>::iterator sgIt = gIt->second.begin();
+		while(sgIt != gIt->second.end()){
+			groupSkillsArray.push_back(*sgIt);
+			sgIt ++;
+		}
+		groupObject["skills"] = groupSkillsArray;
+		groupsArray.push_back(groupObject);
+		gIt ++;
+	}
+
+	json::Object skillsObject;
+	skillsObject["skills"] = skillsArray;
+	skillsObject["groups"] = groupsArray;
+	
+	ofstream output("files/skills.json");
+	output << json::Serialize(skillsObject);
+	output.close();
+}
+
+
+
+void File::loadSkills(){
+	ifstream input("files/skills.json");
+	string jsonStr;
+	getline(input, jsonStr);
+	input.close();
+	json::Object skillsObject = json::Deserialize(jsonStr);
+	vector<Skill> skills;
+	json::Array skillsArray = skillsObject["skills"];
+	vector<json::Value>::iterator sIt = skillsArray.begin();
+	while(sIt != skillsArray.end()){
+		json::Object skillObject = *sIt;
+		Skill skill;
+		skill.name = (string) skillObject["name"];
+		skills.push_back(skill);
+		sIt ++;
+	}
+	Application::setSkills(skills);
+	
+	map<string, vector<int> > skillGroups;
+	json::Array skillGroupsArray = skillsObject["groups"];
+	vector<json::Value>::iterator gIt = skillGroupsArray.begin();
+	while(gIt != skillGroupsArray.end()){
+		json::Object groupObject = *gIt;
+		vector<int> skillsVector;
+		json::Array values = groupObject["skills"];
+		vector<json::Value>::iterator sIt = values.begin();
+		while(sIt != values.end()){
+			skillsVector.push_back(*sIt);
+			sIt ++;
+		}
+		skillGroups[groupObject["name"]] = skillsVector;
+		gIt ++;
+	}
+	Application::setSkillGroups(skillGroups);
 }
 
 void File::loadWorld(){
@@ -62,48 +139,48 @@ void File::loadWorld(){
 	
 	/********* Company **********/
 	
-	World::setMonth(world["month"]);
+	// World::setMonth(world["month"]);
 	
 
-	json::Array companiesObject = world["companies"];
-	vector<json::Value>::iterator companiesIt = companiesObject.begin();
-	while(companiesIt != companiesObject.end()){
+	// json::Array companiesObject = world["companies"];
+	// vector<json::Value>::iterator companiesIt = companiesObject.begin();
+	// while(companiesIt != companiesObject.end()){
 		
-		json::Object companyObject = (*companiesIt);
-		Company& company = World::getCompany(World::addCompany(companyObject["name"]));
+	// 	json::Object companyObject = (*companiesIt);
+	// 	Company& company = World::getCompany(World::addCompany(companyObject["name"]));
 		
-		company.setId(companyObject["id"]);
-		company.setEmployeesNumber(companyObject["employeesNumber"]);
-		company.setHiredEmployeesNumber(companyObject["hiredEmployeesNumber"]);
-		company.setRetiredEmployeesNumber(companyObject["retiredEmployeesNumber"]);
-		company.setAverageEmployeesNumber(companyObject["averageEmployeesNumber"]);
-		company.setAverageHiredLauriasNumber(companyObject["averageHiredLauriasNumber"]);
-		company.setBeginGivingInternships(companyObject["beginGivingInternships"]);
-		company.setEndGivingInternships(companyObject["endGivingInternships"]);
-		company.setAverageInternshipsNumber(companyObject["averageInternshipsNumber"]);
+	// 	company.setId(companyObject["id"]);
+	// 	company.setEmployeesNumber(companyObject["employeesNumber"]);
+	// 	company.setHiredEmployeesNumber(companyObject["hiredEmployeesNumber"]);
+	// 	company.setRetiredEmployeesNumber(companyObject["retiredEmployeesNumber"]);
+	// 	company.setAverageEmployeesNumber(companyObject["averageEmployeesNumber"]);
+	// 	company.setAverageHiredLauriasNumber(companyObject["averageHiredLauriasNumber"]);
+	// 	company.setBeginGivingInternships(companyObject["beginGivingInternships"]);
+	// 	company.setEndGivingInternships(companyObject["endGivingInternships"]);
+	// 	company.setAverageInternshipsNumber(companyObject["averageInternshipsNumber"]);
 
-		vector<int>& skills = company.getSkills();
-		json::Array skillsObject = companyObject["skills"];
-		for(int i = 0; i < skillsObject.size(); i++){
-			skills.push_back(skillsObject[i]);
-		}
+	// 	vector<int>& skills = company.getSkills();
+	// 	json::Array skillsObject = companyObject["skills"];
+	// 	for(int i = 0; i < skillsObject.size(); i++){
+	// 		skills.push_back(skillsObject[i]);
+	// 	}
 
-		vector<int>& internships = company.getInternshipsIds();
-		json::Array internshipsObject = companyObject["internships"];
-		for(int i = 0; i < internshipsObject.size(); i++){
-			internships.push_back(internshipsObject[i]);
-		}
+	// 	vector<int>& internships = company.getInternshipsIds();
+	// 	json::Array internshipsObject = companyObject["internships"];
+	// 	for(int i = 0; i < internshipsObject.size(); i++){
+	// 		internships.push_back(internshipsObject[i]);
+	// 	}
 
-		vector<int>& laureats = company.getLaureatIds();
-		json::Array laureatsObject = companyObject["laureats"];
-		for(int i = 0; i < laureatsObject.size(); i++){
-			laureats.push_back(laureatsObject[i]);
-		}
+	// 	vector<int>& laureats = company.getLaureatIds();
+	// 	json::Array laureatsObject = companyObject["laureats"];
+	// 	for(int i = 0; i < laureatsObject.size(); i++){
+	// 		laureats.push_back(laureatsObject[i]);
+	// 	}
 
-		companiesIt ++;
+	// 	companiesIt ++;
 
 
-	}
+	// }
 
 
 	/****************** School *********************/
@@ -123,7 +200,7 @@ void File::loadWorld(){
 		while(levelsIt != levelsObject.end()){
 			
 			json::Object levelObject = (*levelsIt);
-			Level& level = school.getLevel(school.addLevel(levelObject["successPercentage"], levelObject["hasInternship"],levelObject["internshipDuration"], levelObject["internshipStart"], levelObject["internshipEnd"]));
+			Level& level = school.getLevel(school.addLevel(levelObject["successPercentage"], levelObject["hasInternship"],levelObject["internshipDuration"], levelObject["internshipStart"]));
 			level.setId(levelObject["id"]);
 
 			vector<int>& skills = level.getSkills();
@@ -158,7 +235,7 @@ void File::loadWorld(){
 
 		json::Object studentObject = (*studentsIt);
 		Student& student = World::getStudent(World::addStudent(studentObject["schoolId"], studentObject["levelId"]));
-		student.setCurrenInternshipId(studentObject["internships"]);
+		student.setCurrenInternshipId(studentObject["currentIntershipId"]);
 
 
 		vector<int>& skills = student.getSkills();
@@ -176,52 +253,51 @@ void File::loadWorld(){
 		studentsIt++;
 	}
 
-
 	/**************** Laureats *****************/
-	json::Array laureatsObject = world["laureats"];
-	vector<json::Value>::iterator laureatsIt = laureatsObject.begin();
-	while(laureatsIt != laureatsObject.end()){
+	// json::Array laureatsObject = world["laureats"];
+	// vector<json::Value>::iterator laureatsIt = laureatsObject.begin();
+	// while(laureatsIt != laureatsObject.end()){
 
-		json::Object laureatObject = (*laureatsIt);
-		Laureat& laureat = World::getLaureat(World::addLaureat(laureatObject["schoolId"]));
-		laureat.setCurrentCompanyId(laureatObject["currentCompanypId"]);
-
-
-		vector<int>& skills = laureat.getSkills();
-		json::Array skillsObject = laureatObject["skills"];
-		for(int i = 0; i < skillsObject.size(); i++){
-			skills.push_back(skillsObject[i]);
-		}
-
-		vector<int>& internships = laureat.getInternShips();
-		json::Array internshipsObject = laureatObject["internships"];
-		for(int i = 0; i < internshipsObject.size(); i++){
-			internships.push_back(internshipsObject[i]);
-		}
-
-		laureatsIt++;
-	}
-
-	/*******************Internship**************************/
-	json::Array internshipsObject = world["internships"];
-	vector<json::Value>::iterator internshipsIt = internshipsObject.begin();
-	while(internshipsIt != internshipsObject.end()){
-
-		json::Object internshipObject = (*internshipsIt);
-		Internship& internship = World::getInternship(World::addInternship(internshipObject["companyId"]));
-		internship.setStudentId(internshipObject["studentId"]);
+	// 	json::Object laureatObject = (*laureatsIt);
+	// 	Laureat& laureat = World::getLaureat(World::addLaureat(laureatObject["schoolId"]));
+	// 	laureat.setCurrentCompanyId(laureatObject["currentCompanypId"]);
 
 
-		vector<int>& skills = internship.getSkills();
-		json::Array skillsObject = internshipObject["skills"];
-		for(int i = 0; i < skillsObject.size(); i++){
-			skills.push_back(skillsObject[i]);
-		}
+	// 	vector<int>& skills = laureat.getSkills();
+	// 	json::Array skillsObject = laureatObject["skills"];
+	// 	for(int i = 0; i < skillsObject.size(); i++){
+	// 		skills.push_back(skillsObject[i]);
+	// 	}
+
+	// 	vector<int>& internships = laureat.getInternShips();
+	// 	json::Array internshipsObject = laureatObject["internships"];
+	// 	for(int i = 0; i < internshipsObject.size(); i++){
+	// 		internships.push_back(internshipsObject[i]);
+	// 	}
+
+	// 	laureatsIt++;
+	// }
+
+	// /*******************Internship**************************/
+	// json::Array internshipsObject = world["internships"];
+	// vector<json::Value>::iterator internshipsIt = internshipsObject.begin();
+	// while(internshipsIt != internshipsObject.end()){
+
+	// 	json::Object internshipObject = (*internshipsIt);
+	// 	Internship& internship = World::getInternship(World::addInternship(internshipObject["companyId"]));
+	// 	internship.setStudentId(internshipObject["studentId"]);
+
+
+	// 	vector<int>& skills = internship.getSkills();
+	// 	json::Array skillsObject = internshipObject["skills"];
+	// 	for(int i = 0; i < skillsObject.size(); i++){
+	// 		skills.push_back(skillsObject[i]);
+	// 	}
 
 	
 
-		internshipsIt++;
-	}
+	// 	internshipsIt++;
+	// }
 
 }
 
@@ -316,7 +392,6 @@ void File::saveWorld(){
 			levelObject["successPercentage"] = levelsIt->getSuccessPercentage();
 			levelObject["hasInternship"] = levelsIt->getHasInternship();			
 			levelObject["internshipStart"] = levelsIt->getInternshipStart();
-			levelObject["internshipEnd"] = levelsIt->getInternshipEnd();
 			levelObject["internshipDuration"] = levelsIt->getInternshipDuration();
 
 
@@ -461,20 +536,11 @@ void File::saveWorld(){
 		}
 		internshipObject["skills"] = skillsObject;
 
-
-
 		internshipsObject.push_back(internshipObject);
 		internshipsIt ++;
-
-
 	}
 	world["internships"] = internshipsObject;
 
-
-
 	output << json::Serialize(world);
 	output.close();
-
 }
-
-

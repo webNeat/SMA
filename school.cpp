@@ -1,4 +1,4 @@
-#include "school.hpp"
+#include "world.hpp"
 
 School::School(string name, double average, double ecart, int x, int y) 
 	: Agent(SCHOOL), name_(name), position_(x,y), studentsArrivingNumber_(average, ecart) {}
@@ -6,8 +6,8 @@ School::~School(){}
 
 
 
-int School::addLevel(double successPercentage, bool hasInternship, double internshipDuration, int internshipStart, int internshipEnd){
-	Level level(successPercentage, hasInternship, internshipDuration, internshipStart, internshipEnd);
+int School::addLevel(double successPercentage, bool hasInternship, double internshipDuration, int internshipStart){
+	Level level(successPercentage, hasInternship, internshipDuration, internshipStart);
 	levels_.push_back(level);
 	int id = levels_.size() - 1;
 	levels_.at(id).setId(id);
@@ -24,19 +24,19 @@ bool School::addSkillToLevel(int skillId, int levelId){
 	return true;
 }
 
-void School::addStudent(int id){
-	// studentIds_.push_back(id);
+void School::addStudentToLevel(int studentId, int levelId){
+	getLevel(levelId).addStudent(studentId);
+}
+void School::removeStudentFromLevel(int studentId, int levelId){
+	getLevel(levelId).removeStudent(studentId);
 }
 
-string School::toString(){
-	stringstream ss;
-
-	ss << "name :" << name_ << " position : (" << position_.getX() << "," << position_.getY() << ")" << endl;
-	for (int i = 0; i < levels_.size(); ++i)
-	{
-		ss << levels_[i].toString();
+void School::generateStudents(){
+	int number = studentsArrivingNumber_.get();
+	for(int i = 0; i < number; i++){
+		int studentId = World::addStudent(id_, 0);
+		addStudentToLevel(studentId, 0);
 	}
-	return ss.str();
 }
 
 void School::act(){

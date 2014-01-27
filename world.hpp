@@ -20,7 +20,7 @@ private:
 	static vector<Internship> internships_;
 	static int month_;
 public:	
-	static int addSchool(string, int = 0, int = 0);
+	static int addSchool(string, double = 90, double = 10, int = 0, int = 0);
 	static School& getSchool(int);
 	static int addStudentToSchool(int);
 	static int addStudent(int, int);
@@ -33,9 +33,6 @@ public:
 	
 	static int addCompany(string name);
 	static Company& getCompany(int);
-	static string toString();
-	static void save();
-	static void load();	
 	static void clear();
 	static void act();
 
