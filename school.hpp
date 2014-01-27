@@ -15,7 +15,6 @@ private:
 	vector<Level> levels_;
 	vector<int> laureatIds_;
 	// parametres de simulations
-	Normale studentsArrivingNumber_;
 public:
  	School();
  	School(string name, double, double, int = 0, int = 0);

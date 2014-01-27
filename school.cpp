@@ -1,9 +1,8 @@
 #include "world.hpp"
 
 School::School(string name, double average, double ecart, int x, int y) 
-	: Agent(SCHOOL), name_(name), position_(x,y), studentsArrivingNumber_(average, ecart) {}
+	: Agent(SCHOOL), name_(name), position_(x,y) {}
 School::~School(){}
-
 
 
 int School::addLevel(double successPercentage, bool hasInternship, double internshipDuration, int internshipStart){
@@ -32,7 +31,8 @@ void School::removeStudentFromLevel(int studentId, int levelId){
 }
 
 void School::generateStudents(){
-	int number = studentsArrivingNumber_.get();
+	// int number = studentsArrivingNumber_.get();
+	int number = 10;
 	for(int i = 0; i < number; i++){
 		int studentId = World::addStudent(id_, 0);
 		addStudentToLevel(studentId, 0);
