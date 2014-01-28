@@ -50,7 +50,5 @@ public:
  	static bool addSkillToGroup(int, string);
  	// return false if no group with the given name
  	static void printSkills();
-
-	static void act();
 };
 #endif

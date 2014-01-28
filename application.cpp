@@ -70,8 +70,3 @@ void Application::printSkills(){
 		gIt ++;
 	}
 }
-
-void Application::act(){
-	World::act();
-	File::saveWorld();
-}

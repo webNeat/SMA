@@ -31,7 +31,7 @@ public:
 	static Laureat& getLaureat(int);
 	static Internship& getInternship(int);
 	
-	static int addCompany(string name);
+	static int addCompany(string name, int = 0, int = 0);
 	static Company& getCompany(int);
 	static void clear();
 	static void act();

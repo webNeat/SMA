@@ -65,8 +65,8 @@ int World::addStudentToSchool(int schoolId){
 	return id;
 }
 
-int World::addCompany(string name){
-	Company company(name);
+int World::addCompany(string name, int x, int y){
+	Company company(name, x, y);
 	companies_.push_back(company);
 	int id = companies_.size() - 1;
 	// agents_.push_back(&(companies_.at(id)));
@@ -80,5 +80,32 @@ Company& World::getCompany(int companyId){
 }
 
 void World::act(){
-	// TODO 
+	// TODO : The order should be random !!
+	vector<Company>::iterator itCompanies = companies_.begin();
+	while(itCompanies != companies_.end()){
+		itCompanies->act();
+		itCompanies ++;
+	}
+	
+	vector<School>::iterator itSchools = schools_.begin();
+	while(itSchools != schools_.end()){
+		itSchools->act();
+		itSchools ++;
+	}
+	
+	vector<Student>::iterator itStudents = students_.begin();
+	while(itStudents != students_.end()){
+		itStudents->act();
+		itStudents ++;
+	}
+	
+	vector<Laureat>::iterator itLaureats = laureats_.begin();
+	while(itLaureats != laureats_.end()){
+		itLaureats->act();
+		itLaureats ++;
+	}
+
+	month_ ++;
+	if(month_ == 13)
+		month_ = 1;
 }

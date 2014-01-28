@@ -1,6 +1,7 @@
 #ifndef COMPANY_HPP
 #define COMPANY_HPP
 #include "agent.hpp"
+#include "point.hpp"
 #include "level.hpp"
 #include <string>
 #include <vector>
@@ -10,8 +11,9 @@ class Company : Agent {
 private:
 	int id_;
 	string name_;
+	Point position_;
 	vector<int> skills_;
-	vector<int> InternshipsIds_;
+	vector<int> internshipsIds_;
 	vector<int> laureatIds_;
 	// Statistiques
 	int employeesNumber_;
@@ -26,22 +28,24 @@ private:
 	int endGivingInternships_;
 public:
  	Company();
- 	Company(string name);
+ 	Company(string name, int = 0, int = 0);
  	~Company();
 	
 	vector<int>& getSkills(){
 		return skills_;
 	};
-	 void setSkills(vector<int> skills){
+	void setSkills(vector<int> skills){
 		skills_ = skills;
 	};
-	
+		Point& getPosition(){
+		return position_;
+	};
 
 	vector<int>& getInternshipsIds(){
-		return InternshipsIds_;
+		return internshipsIds_;
 	};
 	void setInternshipsIds(vector<int> InternshipsIds){
-		InternshipsIds_ = InternshipsIds;
+		internshipsIds_ = InternshipsIds;
 	};
 	vector<int>& getLaureatIds(){
 		return laureatIds_;

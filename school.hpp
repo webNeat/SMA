@@ -49,7 +49,7 @@ public:
 	void removeStudentFromLevel(int, int);
 	void generateStudents();
 
- 	string toString();
+	void deliberate();
  	void act();
  	void print();
 };

@@ -39,8 +39,34 @@ void School::generateStudents(){
 	}
 }
 
+void School::deliberate(){
+	Level& last = levels_.back();
+	vector<int>& students = last.getstudentIds();
+	for(vector<int>::iterator it = students.begin(); it != students.end(); it ++ ){
+		World::addLaureat(id_);
+	}
+	students.clear();
+	int size = levels_.size();
+	for(int i = size - 2; i > -1; i -- ){
+		Level& level = levels_.at(i);
+		Level& nextLevel = levels_.at(i + 1);
+		vector<int>& students = level.getstudentIds();
+		int number = level.getSuccessPercentage() * students.size();
+		for(int j = 0; j < number; j++){
+			int id = students.front();
+			nextLevel.addStudent(id);
+			students.erase(students.begin());
+			World::getStudent(id).setLevelId(World::getStudent(id).getLevelId() + 1);
+		}
+	}
+}
+
 void School::act(){
-	// TODO
+	// TODO : should be improved !
+	if(World::getMonth() == 9){
+		deliberate();
+		generateStudents();
+	}
 }
 
 void School::print(){

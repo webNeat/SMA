@@ -20,6 +20,9 @@ public:
 	int getLevelId(){
 		return levelId_;
 	};
+	void setLevelId(int newId){
+		levelId_ = newId;
+	};
 	vector<int>& getSkills(){
 		return skills_;
 	};
