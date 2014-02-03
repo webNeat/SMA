@@ -7,9 +7,8 @@
 #include <vector>
 using namespace std;
 
-class Company : Agent {
+class Company : public Agent {
 private:
-	int id_;
 	string name_;
 	Point position_;
 	vector<int> skills_;
@@ -59,13 +58,6 @@ public:
 	};
 	void setAverageInternshipsNumber(int averageInternshipsNumber){
 		averageInternshipsNumber_ = averageInternshipsNumber;
-	};
-
-	int getId(){
-		return id_;
-	};
-	void setId(int id){
-		id_ = id;
 	};
 
 	string getName(){

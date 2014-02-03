@@ -6,32 +6,41 @@
 #include "laureat.hpp"
 #include "internship.hpp"
 #include "lib.hpp"
-#include <vector>
+#include <map>
 #include <sstream>
 #include <fstream>
 using namespace std;
+/**
+ * Convert all vectors to maps !!!
+ * Add vector<Positions> and direction for Students and Laureats
+ * Add move method for Student and Laureat
+ * 	Parametres: distance by movement; number of movements by month
+ * 	Add bool new for Company (true when created; false from the first act)
+ * 	struct Agent { Type, id }
+ */
 class World {
 private:
 	static vector<Agent *> agents_;
-	static vector<Company> companies_;
-	static vector<School> schools_;
-	static vector<Student> students_;
-	static vector<Laureat> laureats_;
+	static map<int, Company> companies_;
+	static map<int, School> schools_;
+	static map<int, Student> students_;
+	static map<int, Laureat> laureats_;
 	static vector<Internship> internships_;
 	static int month_;
 public:	
-	static int addSchool(string, double = 90, double = 10, int = 0, int = 0);
+	static int addSchool(string, double = 90, double = 10, int = 0, int = 0, int = -1);
 	static School& getSchool(int);
 	static int addStudentToSchool(int);
-	static int addStudent(int, int);
-	static int addLaureat(int);
+	static int addStudent(int, int, int = -1);
+	static void removeStudent(int);
+	static int addLaureat(int, int = -1);
 	static int addInternship(int);
 	
 	static Student& getStudent(int);
 	static Laureat& getLaureat(int);
 	static Internship& getInternship(int);
 	
-	static int addCompany(string name, int = 0, int = 0);
+	static int addCompany(string name, int = 0, int = 0, int = -1);
 	static Company& getCompany(int);
 	static void clear();
 	static void act();
@@ -45,32 +54,32 @@ public:
 	static vector<Internship>& getInternships(){
 		return internships_;
 	};
-	static vector<Company>& getCompanies(){
+	static map<int, Company>& getCompanies(){
 		return companies_;
 	};
-	static vector<School>& getSchools(){
+	static map<int, School>& getSchools(){
 		return schools_;
 	};
-	static vector<Laureat>& getLaureats(){
+	static map<int, Laureat>& getLaureats(){
 		return laureats_;
 	};
-	static vector<Student>& getStudents(){
+	static map<int, Student>& getStudents(){
 		return students_;
 	};
 
 	static void  setInternships(vector<Internship> interenships){
 		 internships_ = interenships;
 	};
-	static void  setCompanies(vector<Company> companies){
-		 companies_ = companies_;
+	static void  setCompanies(map<int, Company> companies){
+		 companies_ = companies;
 	};
-	static void  setSchools(vector<School> schools){
+	static void  setSchools(map<int, School> schools){
 		 schools_ = schools;
 	};
-	static void  setLaureats(vector<Laureat> laureats){
+	static void  setLaureats(map<int, Laureat> laureats){
 		 laureats_ = laureats;
 	};
-	static void setStudents(vector<Student> students){
+	static void setStudents(map<int, Student> students){
 		 students_ = students;
 	};
 	

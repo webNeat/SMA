@@ -4,7 +4,7 @@
 #include "agent.hpp"
 using namespace std;
 
-class Laureat : Agent {
+class Laureat : public Agent {
 private:
 	int schoolId_;
 	vector<int> skills_;

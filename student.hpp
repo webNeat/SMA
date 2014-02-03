@@ -4,7 +4,7 @@
 #include "agent.hpp"
 using namespace std;
 
-class Student : Agent {
+class Student : public Agent {
 private:
 	int schoolId_;
 	int levelId_;

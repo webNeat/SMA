@@ -10,7 +10,20 @@ void Controller::start(){
 	File::loadParams();
 	File::loadConfig();
 	File::loadSkills();
-	File::loadWorld();
+	// File::loadWorld();
+	School& isima = World::getSchool(World::addSchool("ISIMA"));
+	isima.addLevel( 0.9, false, 0, -1);
+	isima.addSkillToLevel(0,0);
+	isima.addSkillToLevel(1,0);
+	isima.addLevel( 0.85, true, 5, 4);
+	isima.addSkillToLevel(2,1);
+	isima.addSkillToLevel(4,1);
+	Company& atos = World::getCompany(World::addCompany("ATOS"));
+	atos.addSkill(0);
+	atos.addSkill(1);
+	atos.addSkill(2);
+	atos.addSkill(3);
+	File::saveWorld();
 	act();
 
 	ServerSocket server(portNumber_);

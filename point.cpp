@@ -1,10 +1,7 @@
 #include "point.hpp"
 #include <iostream>
-Point::Point(){
-    cout<< "Constructeur par défaut"<<endl;
-}
 Point::Point(int x, int y){
-    cout<< "Constructeur par params"<<endl;
+    // cout<< "Constructeur par params"<<endl;
     this->x_ = x;  
     this->y_ = y;    
   

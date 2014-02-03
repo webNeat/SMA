@@ -7,9 +7,8 @@
 #include <string>
 #include <vector>
 using namespace std;
-class School : Agent {
+class School : public Agent {
 private:
-	int id_;
 	string name_;
 	Point position_;
 	vector<Level> levels_;
@@ -19,13 +18,6 @@ public:
  	School();
  	School(string name, double, double, int = 0, int = 0);
 	~School();
-	
-	int getId(){
-		return id_;
-	};
-	void setId(int id){
-		id_ = id;
-	};
  	string getName(){
  		return name_;
  	};
@@ -48,6 +40,10 @@ public:
 	void addStudentToLevel(int, int);
 	void removeStudentFromLevel(int, int);
 	void generateStudents();
+
+	void addLaureat(int id){
+		laureatIds_.push_back(id);
+	}
 
 	void deliberate();
  	void act();
