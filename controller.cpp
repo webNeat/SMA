@@ -12,13 +12,15 @@ void Controller::start(){
 	File::loadSkills();
 	// File::loadWorld();
 	School& isima = World::getSchool(World::addSchool("ISIMA"));
-	isima.addLevel( 0.9, false, 0, -1);
+	isima.addLevel( 0.9, true, 0, -1);
 	isima.addSkillToLevel(0,0);
 	isima.addSkillToLevel(1,0);
 	isima.addLevel( 0.85, true, 5, 4);
 	isima.addSkillToLevel(2,1);
 	isima.addSkillToLevel(4,1);
 	Company& atos = World::getCompany(World::addCompany("ATOS"));
+	atos.getPosition().setX(700);
+	atos.getPosition().setY(400);
 	atos.addSkill(0);
 	atos.addSkill(1);
 	atos.addSkill(2);

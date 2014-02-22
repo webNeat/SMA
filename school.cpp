@@ -32,7 +32,7 @@ void School::removeStudentFromLevel(int studentId, int levelId){
 
 void School::generateStudents(){
 	// int number = studentsArrivingNumber_.get();
-	int number = 10;
+	int number = 5;
 	for(int i = 0; i < number; i++){
 		int studentId = World::addStudent(id_, 0);
 		addStudentToLevel(studentId, 0);
@@ -40,26 +40,26 @@ void School::generateStudents(){
 }
 
 void School::deliberate(){
-	Level& last = levels_.back();
-	vector<int> students = last.getstudentIds();
-	last.getstudentIds().clear();
-	int size = levels_.size();
-	for(int i = size - 2; i > -1; i -- ){
-		Level& level = levels_.at(i);
-		Level& nextLevel = levels_.at(i + 1);
-		vector<int>& studentsTemp = level.getstudentIds();
-		int number = level.getSuccessPercentage() * studentsTemp.size();
-		for(int j = 0; j < number; j++){
-			int id = studentsTemp.front();
-			nextLevel.addStudent(id);
-			World::getStudent(id).setLevelId(World::getStudent(id).getLevelId() + 1);
-			studentsTemp.erase(studentsTemp.begin());
-		}
-	}
-	for(vector<int>::iterator it = students.begin(); it != students.end(); it ++ ){
-		addLaureat(World::addLaureat(id_));
-		World::removeStudent(*it);
-	}
+	// Level& last = levels_.back();
+	// vector<int> students = last.getstudentIds();
+	// last.getstudentIds().clear();
+	// int size = levels_.size();
+	// for(int i = size - 2; i > -1; i -- ){
+	// 	Level& level = levels_.at(i);
+	// 	Level& nextLevel = levels_.at(i + 1);
+	// 	vector<int>& studentsTemp = level.getstudentIds();
+	// 	int number = level.getSuccessPercentage() * studentsTemp.size();
+	// 	for(int j = 0; j < number; j++){
+	// 		int id = studentsTemp.front();
+	// 		nextLevel.addStudent(id);
+	// 		World::getStudent(id).setLevelId(World::getStudent(id).getLevelId() + 1);
+	// 		studentsTemp.erase(studentsTemp.begin());
+	// 	}
+	// }
+	// for(vector<int>::iterator it = students.begin(); it != students.end(); it ++ ){
+	// 	addLaureat(World::addLaureat(id_));
+	// 	World::removeStudent(*it);
+	// }
 }
 
 void School::act(){

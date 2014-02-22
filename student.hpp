@@ -2,6 +2,7 @@
 #define STUDENT_HPP
 #include <vector>
 #include "agent.hpp"
+#include "point.hpp"
 using namespace std;
 
 class Student : public Agent {
@@ -11,8 +12,11 @@ private:
 	vector<int> skills_;
 	vector<int> internships_;
 	int currentIntershipId_;
+	Point currentPosition_;
+	vector<Point> positions_;
+	double angle_;
 public:
-	Student(int, int = 0);
+	Student(int, int = 0, int = 0, int = 0);
 
 	int getSchoolId(){
 		return schoolId_;
@@ -32,11 +36,21 @@ public:
 	int getCurrenInternshipId(){
 		return currentIntershipId_;
 	};
-
 	void setCurrenInternshipId(int currentID){
 		currentIntershipId_ = currentID;
 	};
-
+	Point& getCurrentPosition(){
+		return currentPosition_;
+	}
+	vector<Point>& getPositions(){
+		return positions_;
+	}
+	double getAngle(){
+		return angle_;
+	}
+	void setAngle(double angle){
+		angle_ = angle;
+	}
 	void act();
 };
 #endif

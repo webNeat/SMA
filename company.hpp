@@ -112,6 +112,8 @@ public:
  		endGivingInternships_ = endGivingInternships;
  	};
 
+ 	int getAvailableInternship();
+
  	bool addSkill(int);
 
  	void act();

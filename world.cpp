@@ -22,7 +22,8 @@ int World::addSchool(string name, double average, double ecart, int x, int y, in
 
 int World::addStudent(int schoolId, int levelId, int key){
 	// cout <<  "addStudent: schoolId: " << schoolId << " | levelId: " << levelId << " | key: " << key << endl;
-	Student student(schoolId, levelId);
+	School& school = getSchool(schoolId);
+	Student student(schoolId, levelId, school.getPosition().getX(), school.getPosition().getY());
 	if(key == -1)
 		key = student.getId();
 	else
@@ -32,7 +33,8 @@ int World::addStudent(int schoolId, int levelId, int key){
 }
 
 int World::addStudentToSchool(int schoolId){
-	Student student(schoolId);
+	School& school = getSchool(schoolId);
+	Student student(schoolId, 0, school.getPosition().getX(), school.getPosition().getY());
 	int id = student.getId();
 	students_.insert(pair<int, Student>(id ,student));
 	// agents_.push_back(&(students_.at(id)));
@@ -94,6 +96,19 @@ int World::addCompany(string name, int x, int y, int key){
 Company& World::getCompany(int companyId){
 	// if(companyId < companies_.size())
 	return companies_.at(companyId);
+}
+
+int World::getCompanyNearTo(int x, int y){
+	int cx, cy;
+	map<int, Company>::iterator it = companies_.begin();
+	while(it != companies_.end()){
+		cx = it->second.getPosition().getX();
+		cy = it->second.getPosition().getY();
+		if( ( x > cx - 25 ) && ( x < cx + 25 ) && ( y > cy - 25 ) && ( y < cy + 25 ))
+			return it->first;
+		it ++;
+	}
+	return -1;
 }
 
 void World::act(){

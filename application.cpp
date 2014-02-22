@@ -4,8 +4,9 @@
 map<string,double> Application::params_;
 vector<Skill> Application::skills_;
 map<string, vector<int> > Application::skillGroups_;
-Uniforme Application::uniforme;
-Bernoulli Application::bernoulli;
+Uniforme Application::uniforme_;
+Bernoulli Application::bernoulli_;
+Normale Application::normale_(0, 1);
 
 void Application::addParam(string key, double value){
 	params_.insert(pair<string, double>(key,value));

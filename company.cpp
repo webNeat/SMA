@@ -14,6 +14,14 @@ Company::Company(string name, int x, int y) : Agent(COMPANY), position_(x, y) {
 
 Company::~Company(){}
 
+int Company::getAvailableInternship(){
+	for(int i = 0; i < internshipsIds_.size(); i++){
+		if(World::getInternships().at(internshipsIds_.at(i)).getStudentId() == -1)
+			return internshipsIds_.at(i);
+	}
+	return -1;
+}
+
 bool Company::addSkill(int skillId){
 	// check if it's already there !
 	skills_.push_back(skillId);

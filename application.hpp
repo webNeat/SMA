@@ -18,13 +18,18 @@ private:
 	static map<string, vector<int> > skillGroups_;
 	static map<string, double> params_;
 
-	static Uniforme uniforme;
-	static Bernoulli bernoulli;
 public:
+	static Uniforme uniforme_;
+	static Bernoulli bernoulli_;
+	static Normale normale_;
+
 	static void addParam(string key, double value);
  	static map<string, double>& getParams(){
  		return params_;
  	};
+ 	static double getParam(string name){
+ 		return params_.at(name);
+ 	}
  	static void setParams(map<string, double>& p){
  		params_ = p;
  	};

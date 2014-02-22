@@ -235,6 +235,9 @@ void File::loadWorld(){
 		json::Object studentObject = (*studentsIt);
 		Student& student = World::getStudent(World::addStudent(studentObject["schoolId"], studentObject["levelId"], studentObject["id"]));
 		student.setCurrenInternshipId(studentObject["currentIntershipId"]);
+		student.setAngle(studentObject["angle"]);
+		student.getCurrentPosition().setX(studentObject["x"]);
+		student.getCurrentPosition().setY(studentObject["y"]);
 
 		vector<int>& skills = student.getSkills();
 		json::Array skillsObject = studentObject["skills"];
@@ -439,7 +442,7 @@ void File::saveWorld(){
 	json::Array studentsObject;
 	map<int, Student>& students = World::getStudents();
 	map<int, Student>::iterator studentsIt = students.begin();
-	cout << students.size() << " students saved !" << endl; 
+	// cout << students.size() << " students saved !" << endl; 
 	while(studentsIt != students.end()){		
 		json::Object studentObject;
 
@@ -447,6 +450,9 @@ void File::saveWorld(){
 		studentObject["schoolId"] = studentsIt->second.getSchoolId();
 		studentObject["levelId"] = studentsIt->second.getLevelId();
 		studentObject["currentIntershipId"] = studentsIt->second.getCurrenInternshipId();
+		studentObject["angle"] = studentsIt->second.getAngle();
+		studentObject["x"] = studentsIt->second.getCurrentPosition().getX();
+		studentObject["y"] = studentsIt->second.getCurrentPosition().getY();
 
 		json::Array skillsObject;
 		vector<int>& skills = studentsIt->second.getSkills();
@@ -456,6 +462,18 @@ void File::saveWorld(){
 
 		}
 		studentObject["skills"] = skillsObject;
+
+		json::Array positionsArray;
+		vector<Point>& positions = studentsIt->second.getPositions();
+		vector<Point>::iterator positionsIt = positions.begin();
+		while(positionsIt != positions.end()){
+			json::Object positionObject;
+			positionObject["x"] = positionsIt->getX();
+			positionObject["y"] = positionsIt->getY();
+			positionsArray.push_back(positionObject);
+			positionsIt ++;
+		}
+		studentObject["positions"] = positionsArray;
 
 		json::Array internshipObject;
 		vector<int>& internships = studentsIt->second.getInternShips();

@@ -11,7 +11,6 @@
 #include <fstream>
 using namespace std;
 /**
- * Convert all vectors to maps !!!
  * Add vector<Positions> and direction for Students and Laureats
  * Add move method for Student and Laureat
  * 	Parametres: distance by movement; number of movements by month
@@ -42,6 +41,7 @@ public:
 	
 	static int addCompany(string name, int = 0, int = 0, int = -1);
 	static Company& getCompany(int);
+	static int getCompanyNearTo(int, int);
 	static void clear();
 	static void act();
 
