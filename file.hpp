@@ -8,6 +8,9 @@ public:
 	static void saveParams();
 	static void loadParams();
 
+	static void saveSkills();
+	static void loadSkills();
+
 	static void saveWorld();
 	static void loadWorld();
 };

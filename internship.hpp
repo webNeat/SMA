@@ -8,9 +8,14 @@ private:
 	int companyId_;
 	int studentId_;
 	vector<int> skillIds_;
+	bool available_;
 public:
-	Internship(int);
-	void addSkill(int);
+	Internship(int companyId) : companyId_(companyId), studentId_(-1), available_(true) {
+
+	};
+	void addSkill(int id){
+		skillIds_.push_back(id);
+	};
 	int getCompanyId(){
 		return companyId_;
 	};
@@ -23,6 +28,13 @@ public:
 	void setStudentId(int studentId){
 		studentId_ = studentId;
 	};
+	bool getAvailable(){
+		return available_;
+	}
+	
+	void setAvailable(bool val){
+		available_ = val;
+	}
 
 };
 #endif

@@ -14,12 +14,11 @@ private:
 	bool hasInternship_;
 	double internshipDuration_;
 	int internshipStart_;
-	int internshipEnd_;
 	vector<int> skills_;
 	vector<int> studentIds_;
 public:
  	Level();
- 	Level(double, bool, double, int, int);
+ 	Level(double, bool, double, int);
  	~Level();
 
 	int getId();
@@ -31,11 +30,11 @@ public:
 	bool getHasInternship();
 	double getInternshipDuration();
 	int getInternshipStart();
-	int getInternshipEnd();
 	string toString();
 
 	void addSkill(int);
 	void addStudent(int);
+	void removeStudent(int);
 	//string toString(ostream& out);
 // 	Level(const Level &l);
 // 	Level& operator=(const Level&l);	

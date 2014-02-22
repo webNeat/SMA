@@ -7,26 +7,17 @@
 #include <string>
 #include <vector>
 using namespace std;
-class School : Agent {
+class School : public Agent {
 private:
-	int id_;
 	string name_;
 	Point position_;
 	vector<Level> levels_;
 	vector<int> laureatIds_;
 	// parametres de simulations
-	Normale studentsArrivingNumber_;
 public:
  	School();
  	School(string name, double, double, int = 0, int = 0);
 	~School();
-	
-	int getId(){
-		return id_;
-	};
-	void setId(int id){
-		id_ = id;
-	};
  	string getName(){
  		return name_;
  	};
@@ -42,13 +33,19 @@ public:
 	};
 
 	
-	int addLevel( double, bool, double, int, int);
+	int addLevel( double, bool, double, int);
 	Level& getLevel(int);
 	bool addSkillToLevel(int, int);
 
-	void addStudent(int);
+	void addStudentToLevel(int, int);
+	void removeStudentFromLevel(int, int);
+	void generateStudents();
 
- 	string toString();
+	void addLaureat(int id){
+		laureatIds_.push_back(id);
+	}
+
+	void deliberate();
  	void act();
  	void print();
 };

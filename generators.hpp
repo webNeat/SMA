@@ -4,6 +4,7 @@
 #define PI (22 / 7.0)
 #define NUMBER_VALUES 500
 
+#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -89,6 +90,9 @@ protected:
     void generate();
 public:
     Normale(double, double, int = NUMBER_VALUES);
+    ~Normale(){
+        cout << "Destruction !";
+    };
 };
 
 #endif

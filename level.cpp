@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "level.hpp"
 Level::Level(){
 
@@ -7,14 +8,12 @@ Level::Level(
 		double successPercentage, 
 		bool hasInternship, 
 		double internshipDuration, 
-		int internshipStart, 
-		int internshipEnd
+		int internshipStart
 	){
 	this->successPercentage_ =successPercentage;
 	this->hasInternship_ = hasInternship;
 	this->internshipDuration_ = internshipDuration;
 	this->internshipStart_ = internshipStart;
-	this->internshipEnd_ = internshipEnd;
 }
 Level::~Level(){}
 
@@ -45,15 +44,6 @@ double Level::getInternshipDuration(){
 int Level::getInternshipStart(){
 	return internshipStart_;
 }
-int Level::getInternshipEnd(){
-	return internshipEnd_;
-}
-
-string Level::toString(){
-	stringstream ss;
-	ss << id_<< " " << studentIds_.size() << " " << successPercentage_ << " " << hasInternship_ << " " << internshipDuration_ << " " << internshipStart_ << " " << internshipEnd_ << endl;
-	return ss.str();
-}
 
 void Level::addSkill(int skillId){
 	skills_.push_back(skillId);
@@ -63,6 +53,15 @@ void Level::addStudent(int studentId){
 	// TODO : needs some checkings
 	studentIds_.push_back(studentId);
 }
+
+void Level::removeStudent(int studentId){
+	vector<int>::iterator it = find(studentIds_.begin(), studentIds_.end(), studentId);
+	if(it != studentIds_.end()){
+		studentIds_.erase(it);
+	}
+}
+
+
 
 // void Level::toString(ostream& out){
 // 	out << toString;
