@@ -1,7 +1,10 @@
-#include "world.hpp"
+#include "application.hpp"
 
 School::School(string name, double average, double ecart, int x, int y) 
-	: Agent(SCHOOL), name_(name), position_(x,y) {}
+	: Agent(SCHOOL), name_(name), position_(x,y) {
+		arrivingStudentsAverage_ = average;
+		arrivingStudentsEcart_ = ecart;
+	}
 School::~School(){}
 
 
@@ -31,8 +34,7 @@ void School::removeStudentFromLevel(int studentId, int levelId){
 }
 
 void School::generateStudents(){
-	// int number = studentsArrivingNumber_.get();
-	int number = 5;
+	int number = Application::normale_.get(arrivingStudentsAverage_, arrivingStudentsEcart_);
 	for(int i = 0; i < number; i++){
 		int studentId = World::addStudent(id_, 0);
 		addStudentToLevel(studentId, 0);

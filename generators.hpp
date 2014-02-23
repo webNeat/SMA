@@ -88,11 +88,13 @@ private:
     double ecart_;
 protected:
     void generate();
+
 public:
     Normale(double, double, int = NUMBER_VALUES);
     ~Normale(){
         cout << "Destruction !";
     };
+    double get(double = 0, double = 0);
 };
 
 #endif

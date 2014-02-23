@@ -106,6 +106,7 @@
               <span class="badge" id="month"></span>
               Mois Suuivant
             </button>
+            <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="acceuil">Retour</button>
           </div>
         </div>
       </div>
