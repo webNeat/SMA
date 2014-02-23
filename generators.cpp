@@ -153,7 +153,6 @@ int Histogramme::get(){
     return (int) Generator::get();
 }
 
-
 // IV - Normale 
 /** Constructeur.
     @param moyenne la moyenne
@@ -182,5 +181,19 @@ void Normale::generate(){
             values_[i] = values_[i] * ecart_ + moyenne_;
         }
     }
-    cursor_ = 0;    
+    cursor_ = 0;
+}
+
+/** retourne une valeur de la loi normale
+ * @param m la moyenne
+ * @param e l'ecart type; 0 par defaut
+ * 
+ * @return double
+ */
+double Normale::get(double m, double e){
+    double result = Generator::get();
+    if(e != 0){
+        result = (e / ecart_) * (result - moyenne_) + m;
+    }
+    return result;
 }
