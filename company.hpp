@@ -28,7 +28,16 @@ private:
 	int skillsPerInternship_;
 public:
  	Company();
- 	Company(string name, int = 0, int = 0, double = 20, double = 5, double = 10, double = 2, int = 11, int = 3, int = 1);
+ 	Company(string name,
+ 		int x = 0,
+ 		int y = 0,
+ 		double internshipsNumber = 30,
+ 		double internshipsEcart = 5,
+ 		double laureatsNumber = 10,
+ 		double laureatsEcart = 2,
+ 		int start = 11,
+ 		int end = 3,
+ 		int skillsByInternship = 1);
  	~Company();
 	
 	vector<int>& getSkills(){

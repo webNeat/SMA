@@ -107,10 +107,11 @@ Company& World::getCompany(int companyId){
 int World::getCompanyNearTo(int x, int y){
 	int cx, cy;
 	map<int, Company>::iterator it = companies_.begin();
+	double radius = Application::getParam("companyRadius");
 	while(it != companies_.end()){
 		cx = it->second.getPosition().getX();
 		cy = it->second.getPosition().getY();
-		if( ( x > cx - 25 ) && ( x < cx + 25 ) && ( y > cy - 25 ) && ( y < cy + 25 ))
+		if( ( x > cx - radius ) && ( x < cx + radius ) && ( y > cy - radius ) && ( y < cy + radius ))
 			return it->first;
 		it ++;
 	}
