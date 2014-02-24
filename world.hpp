@@ -9,6 +9,7 @@
 #include <map>
 #include <sstream>
 #include <fstream>
+#include <algorithm>
 using namespace std;
 /**
  * Add vector<Positions> and direction for Students and Laureats
@@ -29,6 +30,7 @@ private:
 public:	
 	static int addSchool(string, double = 90, double = 10, int = 0, int = 0, int = -1);
 	static School& getSchool(int);
+	static void initStudents();
 	static int addStudentToSchool(int);
 	static int addStudent(int, int, int = -1);
 	static void removeStudent(int);

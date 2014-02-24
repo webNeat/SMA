@@ -79,6 +79,7 @@ void School::deliberate(){
 
 void School::act(){
 	if(World::getMonth() == 9){
+		World::initStudents();
 		deliberate();
 		generateStudents();
 	}

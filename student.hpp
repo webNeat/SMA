@@ -51,6 +51,11 @@ public:
 	void setAngle(double angle){
 		angle_ = angle;
 	}
+
+	void addInternship(int id){
+		internships_.push_back(id);
+	}
+	void addSkills(vector<int>&);
 	void act();
 };
 #endif

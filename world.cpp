@@ -20,6 +20,12 @@ int World::addSchool(string name, double average, double ecart, int x, int y, in
 	return key;
 }
 
+void World::initStudents(){
+	for(map<int, Student>::iterator it = students_.begin(); it != students_.end(); it ++){
+		it->second.setCurrentInternshipId(-1);
+	}
+}
+
 int World::addStudent(int schoolId, int levelId, int key){
 	// cout <<  "addStudent: schoolId: " << schoolId << " | levelId: " << levelId << " | key: " << key << endl;
 	School& school = getSchool(schoolId);
@@ -44,7 +50,7 @@ int World::addStudentToSchool(int schoolId){
 
 void World::removeStudent(int id){
 	students_.erase(id);
-};
+}
 
 int World::addLaureat(int schoolId, int key){
 	Laureat laureat(schoolId);
