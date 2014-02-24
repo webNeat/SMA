@@ -37,10 +37,8 @@ void Student::act(){
 		y += dy;
 		companyId = World::getCompanyNearTo(x, y);
 		if(companyId != -1){
-			cout << "company found !" << endl;
 			internshipId = World::getCompany(companyId).getAvailableInternship();
 			if(internshipId != -1){
-				cout << "internship added for student " << id_ << endl;
 				currentIntershipId_ = internshipId;
 				World::getInternships().at(internshipId).setStudentId(id_);
 				break;

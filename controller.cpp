@@ -12,7 +12,7 @@ void Controller::start(){
 	File::loadSkills();
 	// File::loadWorld();
 	School& isima = World::getSchool(World::addSchool("ISIMA"));
-	isima.addLevel( 0.9, true, 0, -1);
+	isima.addLevel( 0.9, false, 0, -1);
 	isima.addSkillToLevel(0,0);
 	isima.addSkillToLevel(1,0);
 	isima.addLevel( 0.85, true, 5, 4);
@@ -27,6 +27,13 @@ void Controller::start(){
 	atos.addSkill(3);
 	File::saveWorld();
 	act();
+	World::setMonth(9);
+	act();
+	World::setMonth(9);
+	act();
+	World::setMonth(9);
+	act();
+	return;
 
 	ServerSocket server(portNumber_);
 	string cmd = "firefox " + url_ + " &";

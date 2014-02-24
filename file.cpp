@@ -234,7 +234,7 @@ void File::loadWorld(){
 
 		json::Object studentObject = (*studentsIt);
 		Student& student = World::getStudent(World::addStudent(studentObject["schoolId"], studentObject["levelId"], studentObject["id"]));
-		student.setCurrenInternshipId(studentObject["currentIntershipId"]);
+		student.setCurrentInternshipId(studentObject["currentIntershipId"]);
 		student.setAngle(studentObject["angle"]);
 		student.getCurrentPosition().setX(studentObject["x"]);
 		student.getCurrentPosition().setY(studentObject["y"]);
@@ -449,7 +449,7 @@ void File::saveWorld(){
 		studentObject["id"] = studentsIt->first;
 		studentObject["schoolId"] = studentsIt->second.getSchoolId();
 		studentObject["levelId"] = studentsIt->second.getLevelId();
-		studentObject["currentIntershipId"] = studentsIt->second.getCurrenInternshipId();
+		studentObject["currentIntershipId"] = studentsIt->second.getCurrentInternshipId();
 		studentObject["angle"] = studentsIt->second.getAngle();
 		studentObject["x"] = studentsIt->second.getCurrentPosition().getX();
 		studentObject["y"] = studentsIt->second.getCurrentPosition().getY();

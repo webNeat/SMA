@@ -33,10 +33,10 @@ public:
 	vector<int>& getInternShips(){
 		return internships_;
 	};
-	int getCurrenInternshipId(){
+	int getCurrentInternshipId(){
 		return currentIntershipId_;
 	};
-	void setCurrenInternshipId(int currentID){
+	void setCurrentInternshipId(int currentID){
 		currentIntershipId_ = currentID;
 	};
 	Point& getCurrentPosition(){
