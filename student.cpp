@@ -47,7 +47,7 @@ void Student::act(){
 		y += dy;
 		companyId = World::getCompanyNearTo(x, y);
 		if(companyId != -1){
-			internshipId = World::getCompany(companyId).getAvailableInternship();
+			internshipId = World::getCompany(companyId).getAvailableInternship(skills_);
 			if(internshipId != -1){
 				currentIntershipId_ = internshipId;
 				World::getInternships().at(internshipId).setStudentId(id_);

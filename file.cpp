@@ -150,10 +150,8 @@ void File::loadWorld(){
 
 		Company& company = World::getCompany(World::addCompany(companyObject["name"], positionObject["x"], positionObject["y"], companyObject["id"]));
 		
-		company.setEmployeesNumber(companyObject["employeesNumber"]);
 		company.setHiredEmployeesNumber(companyObject["hiredEmployeesNumber"]);
 		company.setRetiredEmployeesNumber(companyObject["retiredEmployeesNumber"]);
-		company.setAverageEmployeesNumber(companyObject["averageEmployeesNumber"]);
 		company.setAverageHiredLauriasNumber(companyObject["averageHiredLauriasNumber"]);
 		company.setBeginGivingInternships(companyObject["beginGivingInternships"]);
 		company.setEndGivingInternships(companyObject["endGivingInternships"]);
@@ -315,10 +313,8 @@ void File::saveWorld(){
 
 		companyObject["id"] = companiesIt->first;
 		companyObject["name"] = companiesIt->second.getName();
-		companyObject["employeesNumber"] = companiesIt->second.getEmployeesNumber();
 		companyObject["hiredEmployeesNumber"] = companiesIt->second.getHiredEmployeesNumber();
 		companyObject["retiredEmployeesNumber"] = companiesIt->second.getRetiredEmployeesNumber();
-		companyObject["averageEmployeesNumber"] = companiesIt->second.getAverageEmployeesNumber();
 		companyObject["averageHiredLauriasNumber"] = companiesIt->second.getAverageHiredLauriasNumber();
 		companyObject["beginGivingInternships"] = companiesIt->second.getBeginGivingInternships();
 		companyObject["endGivingInternships"] = companiesIt->second.getEndGivingInternships();

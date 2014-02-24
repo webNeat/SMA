@@ -26,13 +26,11 @@ void Controller::start(){
 	atos.addSkill(2);
 	atos.addSkill(3);
 	File::saveWorld();
-	act();
-	World::setMonth(9);
-	act();
-	World::setMonth(9);
-	act();
-	World::setMonth(9);
-	act();
+	for(int i = 0; i < 36; i++){
+		cout << World::getMonth() << endl;
+		act();
+		atos.print();
+	}
 	return;
 
 	ServerSocket server(portNumber_);
