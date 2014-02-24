@@ -11,16 +11,9 @@
 #include <fstream>
 #include <algorithm>
 using namespace std;
-/**
- * Add vector<Positions> and direction for Students and Laureats
- * Add move method for Student and Laureat
- * 	Parametres: distance by movement; number of movements by month
- * 	Add bool new for Company (true when created; false from the first act)
- * 	struct Agent { Type, id }
- */
+
 class World {
 private:
-	static vector<Agent *> agents_;
 	static map<int, Company> companies_;
 	static map<int, School> schools_;
 	static map<int, Student> students_;
