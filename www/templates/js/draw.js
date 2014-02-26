@@ -12,6 +12,10 @@ function Draw (canvasId){
 		studentWidth: 5,
 		studentHeight: 5,
 		studentColor: 'blue',
+		// Laureats
+		laureatWidth: 10,
+		laureatHeight: 10,
+		laureatColor: 'black',
 		// Schools
 		schoolWidth: 35,
 		schoolHeight: 35,
@@ -44,6 +48,7 @@ Draw.prototype.drawStep = function(i){
 	    this.clean();
 		this.drawSchools();
 		this.drawCompanies();
+    	this.drawLaureats(i);
     	this.drawStudents(i);
         setTimeout(function(){
             that.drawStep(i + 1);
@@ -64,6 +69,23 @@ Draw.prototype.drawStudents = function(i){
 		    );
 	});
 	this.context.fillStyle = this.params.studentColor;
+	this.context.fill();
+	this.context.stroke();
+}
+
+Draw.prototype.drawLaureats = function(i){
+	var that = this;
+	this.context.beginPath();
+	this.data.laureats.forEach(function(laureat){
+	    if(i < laureat.positions.length)
+		    that.context.rect( 
+		    	laureat.positions[i].x, 
+		    	laureat.positions[i].y, 
+		    	that.params.laureatWidth, 
+		    	that.params.laureatHeight
+		    );
+	});
+	this.context.fillStyle = this.params.laureatColor;
 	this.context.fill();
 	this.context.stroke();
 }

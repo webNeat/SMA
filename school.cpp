@@ -13,7 +13,6 @@ int School::addLevel(double successPercentage, bool hasInternship, double intern
 	Level level(successPercentage, hasInternship, internshipDuration, internshipStart);
 	levels_.push_back(level);
 	int id = levels_.size() - 1;
-	levels_.at(id).setId(id);
 	return id;
 }
 Level& School::getLevel(int levelId){
@@ -44,13 +43,13 @@ void School::generateStudents(){
 
 void School::deliberate(){
 	Level& last = levels_.back();
-	vector<int> students = last.getstudentIds();
-	last.getstudentIds().clear();
+	vector<int> students = last.getStudentIds();
+	last.getStudentIds().clear();
 	int size = levels_.size();
 	for(int i = size - 2; i > -1; i -- ){
 		Level& level = levels_.at(i);
 		Level& nextLevel = levels_.at(i + 1);
-		vector<int>& studentsTemp = level.getstudentIds();
+		vector<int>& studentsTemp = level.getStudentIds();
 		int number = studentsTemp.size();
 		for(int j = 0; j < number; j++){
 			int id = studentsTemp.front();
@@ -65,14 +64,16 @@ void School::deliberate(){
 			studentsTemp.erase(studentsTemp.begin());
 		}
 	}
-	for(vector<int>::iterator it = students.begin(); it != students.end(); it ++ ){
-		bool condition = Application::bernoulli_.get(last.getSuccessPercentage())
-				&& ( ! last.getHasInternship() ||  World::getStudent(*it).getCurrentInternshipId() != -1);
+	int number = students.size();
+	for(int i = 0; i < number; i++ ){
+		int id = students.at(i);
+		bool condition = Application::bernoulli_.get(last.getSuccessPercentage());
+				// && ( ! last.getHasInternship() ||  World::getStudent(id).getCurrentInternshipId() != -1);
 		if(condition){
-			addLaureat(World::addLaureat(id_));
-			World::removeStudent(*it);
+			addLaureat(World::addLaureat(id));
+			World::removeStudent(id);
 		}else{
-			last.addStudent(*it);
+			last.addStudent(id);
 		}
 	}
 }
@@ -90,7 +91,7 @@ void School::print(){
 	int levelsNumber = levels_.size();
 	cout << name_ << ":" << endl;
 	while(i < levelsNumber){
-		cout << "\t" << i << ": " << levels_.at(i).getstudentIds().size() << endl;
+		cout << "\t" << i << ": " << levels_.at(i).getStudentIds().size() << endl;
 		i++;
 	}
 	cout << "\tLaureats: " << laureatIds_.size() << endl; 

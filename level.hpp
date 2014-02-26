@@ -9,7 +9,6 @@ using namespace std;
 
 class Level {
 private:
-	int id_;
 	double successPercentage_;
 	bool hasInternship_;
 	double internshipDuration_;
@@ -21,11 +20,15 @@ public:
  	Level(double, bool, double, int);
  	~Level();
 
-	int getId();
-	void setId(int);
 	int getstudentNumber();
 	vector<int>& getSkills();
-	vector<int>& getstudentIds();
+	void setSkills(vector<int> list){
+		skills_ = list;
+	}
+	vector<int>& getStudentIds();
+	void setStudentIds(vector<int> list){
+		studentIds_ = list;
+	}
 	double getSuccessPercentage();
 	bool getHasInternship();
 	double getInternshipDuration();

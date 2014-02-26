@@ -50,14 +50,24 @@ void World::removeStudent(int id){
 	students_.erase(id);
 }
 
-int World::addLaureat(int schoolId, int key){
-	Laureat laureat(schoolId);
-	if(key == -1)
-		key = laureat.getId();
-	else
-		laureat.setId(key);
-	laureats_.insert(pair<int, Laureat>(key ,laureat));
-	return key;
+int World::addLaureat(int studentId, int key){
+	if(studentId != -1){
+		Laureat laureat(getStudent(studentId));
+		if(key == -1)
+			key = laureat.getId();
+		else
+			laureat.setId(key);
+		laureats_.insert(pair<int, Laureat>(key ,laureat));
+		return key;
+	}else{
+		Laureat laureat;
+		if(key == -1)
+			key = laureat.getId();
+		else
+			laureat.setId(key);
+		laureats_.insert(pair<int, Laureat>(key ,laureat));
+		return key;
+	}
 }
 int World::addInternship(int companyId){
 	Internship internship(companyId);
@@ -115,22 +125,8 @@ int World::getCompanyNearTo(int x, int y){
 	return -1;
 }
 
-void World::act(){
-	vector<Agent *> agents;
+void World::randomAct(vector<Agent *>& agents){
 	Agent * temp;
-	// Add companies
-	for(map<int, Company>::iterator it = companies_.begin(); it != companies_.end(); it ++)
-		agents.push_back(&(it->second));
-	// Add schools
-	for(map<int, School>::iterator it = schools_.begin(); it != schools_.end(); it ++)
-		agents.push_back(&(it->second));
-	// Add students
-	for(map<int, Student>::iterator it = students_.begin(); it != students_.end(); it ++)
-		agents.push_back(&(it->second));
-	// Add laureats
-	for(map<int, Laureat>::iterator it = laureats_.begin(); it != laureats_.end(); it ++)
-		agents.push_back(&(it->second));
-
 	int last = agents.size() - 1;
 	while(last > 0){
 		int index = Application::uniforme_.get(0, last);
@@ -141,36 +137,44 @@ void World::act(){
 		last --;
 	}
 	agents.at(0)->act();
+}
+
+void World::act(){
+	vector<Agent *> agents;
+	// Schools
+	for(map<int, School>::iterator it = schools_.begin(); it != schools_.end(); it ++)
+		agents.push_back(&(it->second));
+	randomAct(agents);
+
+	agents.clear();
+	// Add companies
+	for(map<int, Company>::iterator it = companies_.begin(); it != companies_.end(); it ++)
+		agents.push_back(&(it->second));
+	// Add students
+	for(map<int, Student>::iterator it = students_.begin(); it != students_.end(); it ++)
+		agents.push_back(&(it->second));
+	// Add laureats
+	for(map<int, Laureat>::iterator it = laureats_.begin(); it != laureats_.end(); it ++)
+		agents.push_back(&(it->second));
+	randomAct(agents);
 
 	month_ ++;
 	if(month_ == 13)
 		month_ = 1;
 }
 
-// void World::act(){
-// 	// Companies
-// 	map<int, Company>::iterator itCompanies = companies_.begin();
-// 	while(itCompanies != companies_.end()){
-// 		itCompanies->second.act();
-// 		itCompanies ++;
-// 	}
-	
-// 	// Schools
-// 	map<int, School>::iterator itSchools = schools_.begin();
-// 	while(itSchools != schools_.end()){
-// 		itSchools->second.act();
-// 		itSchools ++;
-// 	}
+double World::getWorkingLaureats(){
+	int working = 0;
+	for(map<int, Company>::iterator it = companies_.begin(); it != companies_.end(); it ++)
+		working += it->second.getLaureatIds().size();
+	return working;
+}
 
-// 	// Students
-// 	map<int, Student>::iterator itStudents = students_.begin();
-// 	while(itStudents != students_.end()){
-// 		itStudents->second.act();
-// 		itStudents ++;
-// 	}
-	
-// 	map<int, Laureat>::iterator itLaureats = laureats_.begin();
-// 	while(itLaureats != laureats_.end()){
-// 		itLaureats->second.act();
-// 		itLaureats ++;
-// 	}
+double World::getStudentsHavingInternship(){
+	int having = 0;
+	for(map<int, Student>::iterator it = students_.begin(); it != students_.end(); it ++){
+		if(it->second.getCurrentInternshipId() != -1)
+			having ++;
+	}
+	return having;
+}

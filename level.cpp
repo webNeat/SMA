@@ -17,19 +17,13 @@ Level::Level(
 }
 Level::~Level(){}
 
-int Level::getId(){
-	return id_;
-}
-void Level::setId(int id){
-	id_ = id;
-}
 int Level::getstudentNumber(){
 	return studentIds_.size();
 }
 vector<int>& Level::getSkills(){
 	return skills_;
 }
-vector<int>& Level::getstudentIds(){
+vector<int>& Level::getStudentIds(){
 	return studentIds_;
 }
 double Level::getSuccessPercentage(){

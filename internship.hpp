@@ -23,6 +23,9 @@ public:
 	vector<int>& getSkills(){
 		return skillIds_;
 	}
+	void setSkills(vector<int> list){
+		skillIds_ = list;
+	}
 	void setStudentId(int studentId){
 		studentId_ = studentId;
 		available_ = (studentId == -1);

@@ -20,6 +20,8 @@ private:
 	static map<int, Laureat> laureats_;
 	static vector<Internship> internships_;
 	static int month_;
+
+	static void randomAct(vector<Agent *>&);
 public:	
 	static int addSchool(string, double = 90, double = 10, int = 0, int = 0, int = -1);
 	static School& getSchool(int);
@@ -39,6 +41,9 @@ public:
 	static int getCompanyNearTo(int, int);
 	static void clear();
 	static void act();
+
+	static double getWorkingLaureats();
+	static double getStudentsHavingInternship();
 
 	static int getMonth(){
 		return month_;

@@ -32,34 +32,17 @@ function loadMap(){
     $.get('api.php?request=' + JSON.stringify(request), function(response) {
         var data = JSON.parse(response);
         design.update(data);
-        $('#simulation #month').html(data.month);
-        // var text = '';
-        // data.schools.forEach(function(school){
-        //     text += '<div class="col-xs-6 col-md-3"><div class="blue section">'
-        //         + '<h3>' + school.name + '</h3><ul>';
-        //         var levelId = 1;
-        //         school.levels.forEach(function(level){
-        //             text += '<li class="break">Niveau ' + levelId + '</li>'
-        //                 + '<li>Nombre d\'étudiants : ' + level.students.length + '</li>'
-        //                 + '<li>Etudiants ayant un stage : 0 </li>';
-        //             levelId ++;
-        //         });
-        //         text += '<li class="break">laureats </li>'
-        //             + '<li>En chaumage :' + school.laureats.length + '</li>'
-        //             + '<li>En stage : 0 </li>'
-        //             + '<li>En travail : 0 </li>';
-        //         text += '</ul></div></div>';
-        // });
+        var percentage = 0;
+        if(data.students.length > 0)
+            percentage = data.studentsHavingInternship / data.students.length;
+        $('#studentsPercent').html( Math.floor(percentage * 100) + '%');
         
-        // data.companies.forEach(function(company){
-        //     text += '<div class="col-xs-6 col-md-3"><div class="brown section">'
-        //         + '<h3>' + company.name + '</h3><ul>'
-        //         + '<li>Nombre total des employés : ' + company.employeesNumber + '</li>'
-        //         + '<li>Nombre total des stages : ' + company.internships.length + '</li>'
-        //         + '<li>Nombre total des lauriats : ' + company.laureats.length + '</li>'
-        //         + '</ul></div></div>';
-        // });
-        // $('#simulation #map').html(text);
+        percentage = 0;
+        if(data.laureats.length > 0)
+            percentage = data.workingLaureats / data.laureats.length;
+        $('#laureatsPercent').html(percentage);
+        
+        $('#simulation #month').html(data.month);
     });
 }
 
@@ -165,4 +148,7 @@ $(document).ready(function() {
 
     // Gestion des formulaires
     bindFormsEvent();
+
+    // Les graphes
+    $('table.highchart').highchartTable();
 });

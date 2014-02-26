@@ -30,9 +30,15 @@ public:
 	vector<int>& getSkills(){
 		return skills_;
 	};
-	vector<int>& getInternShips(){
+	void setSkills(vector<int> list){
+		skills_ = list;
+	}
+	vector<int>& getInternships(){
 		return internships_;
 	};
+	void setInternships(vector<int> list){
+		internships_ = list;
+	}
 	int getCurrentInternshipId(){
 		return currentIntershipId_;
 	};

@@ -39,8 +39,8 @@
     <div class="container page" id="acceuil" title="Acceuil">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="newSimulation">Nouvelle Simulation</button>
-          <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="simulation">Continuer</button>
+          <!-- <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="newSimulation">Nouvelle Simulation</button> -->
+          <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="simulation">Lancer la simulation</button>
           <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="params">Configuration</button>
         </div>
       </div>
@@ -106,8 +106,39 @@
               <span class="badge" id="month"></span>
               Mois Suuivant
             </button>
-            <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="acceuil">Retour</button>
           </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="section blue">
+              <h3>Statistiques</h3>
+              <ul>
+                <li>Taux d'embauche des étudiants : <span class="badge" id="studentsPercent">5</span></li>
+                <li>Taux d'embauche des lauréats : <span class="badge" id="laureatsPercent">5</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div style="margin: 7px">
+              <table  class="highchart" data-graph-container-before="1" data-graph-type="line">
+                <thead><tr>
+                    <th>Saison</th>
+                    <th>Jeunes</th>
+                    <th>Adultes</th>
+                    <th>Total</th>
+                </tr></thead>
+                <tbody>
+                    <tr><td>1</td><td> 1</td><td> 0</td><td> 1</td></tr>
+                    <tr><td>2</td><td>0</td><td>1</td><td>1</td></tr>
+                    <tr><td>3</td><td>0</td><td>1</td><td>2</td></tr>
+                    <tr><td>4</td><td>1</td><td>1</td><td>3</td></tr>
+                    <tr><td>44</td><td>2670964</td><td>5736961</td><td>12322413</td></tr>
+                    <tr><td>45</td><td>3914488</td><td>8407925</td><td>18059374</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="acceuil">Retour</button>
         </div>
       </div>
     <!-- Charger une simulation -->
@@ -152,6 +183,8 @@
 
     <script src="templates/js/jquery.min.js"></script>
     <script src="templates/js/bootstrap.min.js"></script>
+    <script src="templates/js/highcharts/highcharts.js"></script>
+    <script src="templates/js/charts.js"></script>
     <script src="templates/js/draw.js"></script>
     <script src="templates/js/handler.js"></script>
   </body>

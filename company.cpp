@@ -1,17 +1,27 @@
 #include "application.hpp"
 Company::Company() : Agent(COMPANY), position_(0,0) {}
-Company::Company(string name, int x, int y, double ia, double ie, double la, double le, int begin, int end, int n) : Agent(COMPANY), position_(x, y) {
+Company::Company(string name, int x, int y, double ia, double ie, int begin, int end, int n) : Agent(COMPANY), position_(x, y) {
 	name_ = name;
 	averageInternshipsNumber_ = ia;
 	internshipsNumberEcart_ = ie;
-	averageHiredLauriasNumber_ = la;
-	hiredLaureatsNumberEcart_ = le;
 	beginGivingInternships_ = begin;
 	endGivingInternships_ = end;
 	skillsPerInternship_ = n;
 }
 
 Company::~Company(){}
+
+double Company::getSkillsPercentage(vector<int>& laureatSkills){
+	double found = 0;
+	vector<int>::iterator it = laureatSkills.begin();
+	while(it != laureatSkills.end()){
+		vector<int>::iterator pos = find(skills_.begin(), skills_.end(), *it);
+		if(pos != skills_.end())
+			found ++; 
+		it ++;
+	}
+	return found / (double) skills_.size();
+}
 
 int Company::getAvailableInternship(vector<int>& studentSkills){
 	for(int i = 0; i < internshipsIds_.size(); i++){
@@ -25,9 +35,21 @@ int Company::getAvailableInternship(vector<int>& studentSkills){
 }
 
 bool Company::addSkill(int skillId){
-	// check if it's already there !
+	// TODO check if it's already there !
 	skills_.push_back(skillId);
 	return true;
+}
+
+bool Company::willHire(vector<int>& laureatSkills){
+	vector<int>::iterator it = laureatSkills.begin(),
+		pos;
+	while(it != laureatSkills.end()){
+		pos = find(skills_.begin(), skills_.end(), *it);
+		if(pos != skills_.end() && Application::bernoulli_.get(getSkillsPercentage(laureatSkills)))
+			return true;
+		it ++;
+	}
+	return false;
 }
 
 void Company::act(){
@@ -50,6 +72,7 @@ void Company::act(){
 			World::getInternship(*index).setAvailable(false);
 		}
 	}
+	print();
 }
 
 void Company::print(){
@@ -61,6 +84,8 @@ void Company::print(){
 		it ++;
 	}
 	cout << name_ << endl;
-	cout << "\tTotal:" << internshipsIds_.size() << endl; 
-	cout << "\tAvailable:" << available << endl;
+	// cout << "\tTotal:" << internshipsIds_.size() << endl; 
+	// cout << "\tAvailable:" << available << endl;
+	cout << "\tTotal Laureats:" << World::getLaureats().size() << endl;
+	cout << "\tHired:" << laureatIds_.size() << endl;
 }

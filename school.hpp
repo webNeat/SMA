@@ -21,18 +21,25 @@ public:
 	~School();
  	string getName(){
  		return name_;
- 	};
-
+ 	}
 	Point& getPosition(){
 		return position_;
-	};
+	}
 	vector<Level>& getLevels(){
 		return levels_;
-	};
+	}
 	vector<int>& getLaureatIds(){
 		return laureatIds_;
-	};
-
+	}
+	void setLaureatIds(vector<int> list){
+		laureatIds_ = list;
+	}
+	double getAverage(){
+		return arrivingStudentsAverage_;
+	}
+	double getEcart(){
+		return arrivingStudentsEcart_;
+	}
 	
 	int addLevel( double, bool, double, int);
 	Level& getLevel(int);

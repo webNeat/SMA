@@ -26,5 +26,6 @@ public:
 	static string act();
 	static string save();
 	static string load();
+	static string sample();
 };
 #endif
