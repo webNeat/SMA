@@ -72,7 +72,7 @@ void Company::act(){
 			World::getInternship(*index).setAvailable(false);
 		}
 	}
-	print();
+	// print();
 }
 
 void Company::print(){
@@ -88,4 +88,25 @@ void Company::print(){
 	// cout << "\tAvailable:" << available << endl;
 	cout << "\tTotal Laureats:" << World::getLaureats().size() << endl;
 	cout << "\tHired:" << laureatIds_.size() << endl;
+}
+
+int Company::getAvailableInternships(){
+	int number = 0;
+	vector<int>::iterator it = internshipsIds_.begin();
+	while(it != internshipsIds_.end()){
+		if(World::getInternship(*it).getAvailable())
+			number ++;
+		it ++;
+	}
+	return number;
+}
+int Company::getHiredStudents(){
+	int number = 0;
+	vector<int>::iterator it = internshipsIds_.begin();
+	while(it != internshipsIds_.end()){
+		if(World::getInternship(*it).getStudentId() != -1)
+			number ++;
+		it ++;
+	}
+	return number;
 }

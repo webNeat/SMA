@@ -26,7 +26,6 @@ void World::initStudents(){
 }
 
 int World::addStudent(int schoolId, int levelId, int key){
-	// cout <<  "addStudent: schoolId: " << schoolId << " | levelId: " << levelId << " | key: " << key << endl;
 	School& school = getSchool(schoolId);
 	Student student(schoolId, levelId, school.getPosition().getX(), school.getPosition().getY());
 	if(key == -1)
@@ -107,7 +106,6 @@ int World::addCompany(string name, int x, int y, int key){
 }
 
 Company& World::getCompany(int companyId){
-	// if(companyId < companies_.size())
 	return companies_.at(companyId);
 }
 
@@ -177,4 +175,14 @@ double World::getStudentsHavingInternship(){
 			having ++;
 	}
 	return having;
+}
+
+int World::studentsShouldHaveInternship(){
+	int number = 0;
+	for(map<int, School>::iterator it = schools_.begin(); it != schools_.end(); it ++){
+		for(vector<Level>::iterator itt = it->second.getLevels().begin(); itt != it->second.getLevels().end(); itt ++)
+			if(itt->getHasInternship())
+				number += itt->getStudentIds().size();
+	}
+	return number;	
 }

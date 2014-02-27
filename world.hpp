@@ -44,6 +44,7 @@ public:
 
 	static double getWorkingLaureats();
 	static double getStudentsHavingInternship();
+	static int studentsShouldHaveInternship();
 
 	static int getMonth(){
 		return month_;

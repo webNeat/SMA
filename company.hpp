@@ -100,5 +100,8 @@ public:
 
  	void act();
  	void print();
+
+ 	int getAvailableInternships();
+ 	int getHiredStudents();
 };
 #endif

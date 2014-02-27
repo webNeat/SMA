@@ -56,5 +56,9 @@ public:
 	void deliberate();
  	void act();
  	void print();
+
+	int getStudentsHavingInternship();
+	int studentsShouldHaveInternship();
+	int getWorkingLaureats();
 };
 #endif

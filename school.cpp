@@ -53,8 +53,8 @@ void School::deliberate(){
 		int number = studentsTemp.size();
 		for(int j = 0; j < number; j++){
 			int id = studentsTemp.front();
-			bool condition = Application::bernoulli_.get(level.getSuccessPercentage())
-				&& ( ! level.getHasInternship() ||  World::getStudent(id).getCurrentInternshipId() != -1);
+			bool condition = Application::bernoulli_.get(level.getSuccessPercentage());
+				// && ( ! level.getHasInternship() ||  World::getStudent(id).getCurrentInternshipId() != -1);
 			if(condition){
 				nextLevel.addStudent(id);
 				World::getStudent(id).setLevelId(World::getStudent(id).getLevelId() + 1);
@@ -83,6 +83,7 @@ void School::act(){
 		World::initStudents();
 		deliberate();
 		generateStudents();
+		// print();
 	}
 }
 
@@ -94,5 +95,30 @@ void School::print(){
 		cout << "\t" << i << ": " << levels_.at(i).getStudentIds().size() << endl;
 		i++;
 	}
-	cout << "\tLaureats: " << laureatIds_.size() << endl; 
+	cout << "\tLaureats: " << laureatIds_.size() << endl;
+}
+
+int School::getWorkingLaureats(){
+	int working = 0;
+	for(vector<int>::iterator it = laureatIds_.begin(); it != laureatIds_.end(); it ++)
+		if(World::getLaureat(*it).getCurrentCompanyId() != -1)
+			working ++;
+	return working;
+}
+
+int School::getStudentsHavingInternship(){
+	int having = 0;
+	for(vector<Level>::iterator it = levels_.begin(); it != levels_.end(); it ++)
+		for(vector<int>::iterator itt = it->getStudentIds().begin(); itt != it->getStudentIds().end(); itt ++)
+			if(World::getStudent(*itt).getCurrentInternshipId() != -1)
+				having ++;
+	return having;
+}
+
+int School::studentsShouldHaveInternship(){
+	int number = 0;
+	for(vector<Level>::iterator it = levels_.begin(); it != levels_.end(); it ++)
+		if(it->getHasInternship())
+			number += it->getStudentIds().size();
+	return number;
 }

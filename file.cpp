@@ -202,6 +202,9 @@ json::Object File::companyToJson(Company& company){
 	obj["skills"] = vectorToArray(company.getSkills());
 	obj["internships"] = vectorToArray(company.getInternshipsIds());
 	obj["laureats"] = vectorToArray(company.getLaureatIds());
+
+	obj["availableInternships"] = company.getAvailableInternships();
+	obj["hiredStudents"] = company.getHiredStudents();
 	return obj;
 }
 
@@ -329,6 +332,10 @@ json::Object File::schoolToJson(School& school){
 		it ++;
 	}
 	obj["levels"] = array;
+
+	obj["workingLaureats"] = school.getWorkingLaureats();
+	obj["studentsShouldHaveInternship"] = school.studentsShouldHaveInternship();
+	obj["studentsHavingInternship"] = school.getStudentsHavingInternship();
 	return obj;
 }
 
@@ -474,6 +481,10 @@ json::Object File::worldToJson(){
 		internshipsIt ++;
 	}
 	obj["internships"] = internshipsArray;
+
+	obj["studentsHavingInternship"] = World::getStudentsHavingInternship();
+	obj["studentsShouldHaveInternship"] = World::studentsShouldHaveInternship();
+	obj["workingLaureats"] = World::getWorkingLaureats();
 
 	return obj;
 }

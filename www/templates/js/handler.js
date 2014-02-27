@@ -9,6 +9,7 @@ TODO:
 
 var active;
 var design;
+var statistics;
 
 function loadParams() {
     var request = {
@@ -33,16 +34,19 @@ function loadMap(){
         var data = JSON.parse(response);
         design.update(data);
         var percentage = 0;
-        if(data.students.length > 0)
-            percentage = data.studentsHavingInternship / data.students.length;
+        if(data.studentsShouldHaveInternship > 0)
+            percentage = data.studentsHavingInternship / data.studentsShouldHaveInternship;
         $('#studentsPercent').html( Math.floor(percentage * 100) + '%');
         
         percentage = 0;
         if(data.laureats.length > 0)
             percentage = data.workingLaureats / data.laureats.length;
-        $('#laureatsPercent').html(percentage);
+        $('#laureatsPercent').html(Math.floor(percentage * 100) + '%');
         
         $('#simulation #month').html(data.month);
+
+        statistics.add(data);
+        statistics.show();
     });
 }
 
@@ -67,6 +71,19 @@ function showPage(id) {
         break;
         case 'simulation':
             loadMap();
+        break;
+        case 'newSimulation':
+            var request = {
+                action: 'new'
+            }
+            $.get('api.php?request=' + JSON.stringify(request), function(response) {
+                if(response == 'done'){
+                    showPage('simulation');
+                }else{
+                    showMsg('danger','Error: Check the server output !');
+                }
+            });
+            return;
         break;
         case 'act':
             act();
@@ -133,6 +150,7 @@ $(document).ready(function() {
     active = 'acceuil';
     showPage('acceuil');
     design = new Draw('graph');
+    statistics = new Statistic('statistics');
         // Création de formulaire des paramètres
         var request = {
             action: 'get_params'
@@ -148,7 +166,4 @@ $(document).ready(function() {
 
     // Gestion des formulaires
     bindFormsEvent();
-
-    // Les graphes
-    $('table.highchart').highchartTable();
 });

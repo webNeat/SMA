@@ -11,7 +11,7 @@ void Controller::start(){
 	File::loadConfig();
 	File::loadSkills();
 	File::loadWorld();
-	
+
 	ServerSocket server(portNumber_);
 	string cmd = "firefox " + url_ + " &";
 	system(cmd.c_str());
@@ -31,7 +31,7 @@ void Controller::start(){
 				new_sock << act();
 			}else if(request.compare("exit") == 0){
 				break;
-			}else if(request.compare("sample") == 0){
+			}else if(request.compare("new") == 0){
 				new_sock << sample();
 			}
 		} catch(exception e){
@@ -52,6 +52,8 @@ string Controller::act(){
 }
 
 string Controller::sample(){
+	World::clear();
+
 	School& isima = World::getSchool(World::addSchool("Ecole"));
 	isima.getPosition().setX(70);
 	isima.getPosition().setY(50);
@@ -70,5 +72,7 @@ string Controller::sample(){
 	atos.addSkill(2);
 	atos.addSkill(3);
 	World::setMonth(9);
+
+	File::saveWorld();
 	return "done";
 }
