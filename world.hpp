@@ -9,26 +9,23 @@
 #include <map>
 #include <sstream>
 #include <fstream>
+#include <algorithm>
 using namespace std;
-/**
- * Add vector<Positions> and direction for Students and Laureats
- * Add move method for Student and Laureat
- * 	Parametres: distance by movement; number of movements by month
- * 	Add bool new for Company (true when created; false from the first act)
- * 	struct Agent { Type, id }
- */
+
 class World {
 private:
-	static vector<Agent *> agents_;
 	static map<int, Company> companies_;
 	static map<int, School> schools_;
 	static map<int, Student> students_;
 	static map<int, Laureat> laureats_;
 	static vector<Internship> internships_;
 	static int month_;
+
+	static void randomAct(vector<Agent *>&);
 public:	
 	static int addSchool(string, double = 90, double = 10, int = 0, int = 0, int = -1);
 	static School& getSchool(int);
+	static void initStudents();
 	static int addStudentToSchool(int);
 	static int addStudent(int, int, int = -1);
 	static void removeStudent(int);
@@ -44,6 +41,10 @@ public:
 	static int getCompanyNearTo(int, int);
 	static void clear();
 	static void act();
+
+	static double getWorkingLaureats();
+	static double getStudentsHavingInternship();
+	static int studentsShouldHaveInternship();
 
 	static int getMonth(){
 		return month_;

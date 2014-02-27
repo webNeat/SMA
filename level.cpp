@@ -1,5 +1,5 @@
 #include <algorithm>
-#include "level.hpp"
+#include "world.hpp"
 Level::Level(){
 
 }
@@ -17,19 +17,13 @@ Level::Level(
 }
 Level::~Level(){}
 
-int Level::getId(){
-	return id_;
-}
-void Level::setId(int id){
-	id_ = id;
-}
 int Level::getstudentNumber(){
 	return studentIds_.size();
 }
 vector<int>& Level::getSkills(){
 	return skills_;
 }
-vector<int>& Level::getstudentIds(){
+vector<int>& Level::getStudentIds(){
 	return studentIds_;
 }
 double Level::getSuccessPercentage(){
@@ -50,7 +44,8 @@ void Level::addSkill(int skillId){
 }
 
 void Level::addStudent(int studentId){
-	// TODO : needs some checkings
+	Student& student = World::getStudent(studentId);
+	student.addSkills(skills_);	
 	studentIds_.push_back(studentId);
 }
 
@@ -60,14 +55,3 @@ void Level::removeStudent(int studentId){
 		studentIds_.erase(it);
 	}
 }
-
-
-
-// void Level::toString(ostream& out){
-// 	out << toString;
-// }
-
-// ostream& operator<<(ostream& out, Level &l){
-// 	l.toString(out);
-// 	return out;
-// }

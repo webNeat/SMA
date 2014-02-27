@@ -12,6 +12,10 @@ function Draw (canvasId){
 		studentWidth: 5,
 		studentHeight: 5,
 		studentColor: 'blue',
+		// Laureats
+		laureatWidth: 10,
+		laureatHeight: 10,
+		laureatColor: 'orange',
 		// Schools
 		schoolWidth: 35,
 		schoolHeight: 35,
@@ -44,6 +48,7 @@ Draw.prototype.drawStep = function(i){
 	    this.clean();
 		this.drawSchools();
 		this.drawCompanies();
+    	this.drawLaureats(i);
     	this.drawStudents(i);
         setTimeout(function(){
             that.drawStep(i + 1);
@@ -68,21 +73,38 @@ Draw.prototype.drawStudents = function(i){
 	this.context.stroke();
 }
 
+Draw.prototype.drawLaureats = function(i){
+	var that = this;
+	this.context.beginPath();
+	this.data.laureats.forEach(function(laureat){
+	    if(i < laureat.positions.length)
+		    that.context.rect( 
+		    	laureat.positions[i].x, 
+		    	laureat.positions[i].y, 
+		    	that.params.laureatWidth, 
+		    	that.params.laureatHeight
+		    );
+	});
+	this.context.fillStyle = this.params.laureatColor;
+	this.context.fill();
+	this.context.stroke();
+}
+
 Draw.prototype.drawSchools = function(){
 	var that = this;
 	this.context.beginPath();
 	this.context.fillStyle = this.params.schoolColor;
 	this.data.schools.forEach(function(school){
         that.context.rect( 
-	    	school.position.x, 
-	    	school.position.y, 
+	    	school.x, 
+	    	school.y, 
 	    	that.params.schoolWidth, 
 	    	that.params.schoolHeight
 	    );
 	    that.context.fillText(
 	    	school.name, 
-	    	school.position.x, 
-	    	school.position.y + that.params.schoolHeight + 10
+	    	school.x, 
+	    	school.y + that.params.schoolHeight + 10
 	    );
 	});
 	this.context.fill();
@@ -95,15 +117,15 @@ Draw.prototype.drawCompanies = function(){
 	this.context.fillStyle = this.params.companyColor;
 	this.data.companies.forEach(function(company){
         that.context.rect( 
-	    	company.position.x, 
-	    	company.position.y, 
+	    	company.x, 
+	    	company.y, 
 	    	that.params.companyWidth, 
 	    	that.params.companyHeight
 	    );
 	    that.context.fillText(
 	    	company.name, 
-	    	company.position.x, 
-	    	company.position.y + that.params.companyHeight + 10
+	    	company.x, 
+	    	company.y + that.params.companyHeight + 10
 	    );
 	});
 	this.context.fill();

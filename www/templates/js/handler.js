@@ -9,6 +9,7 @@ TODO:
 
 var active;
 var design;
+var statistics;
 
 function loadParams() {
     var request = {
@@ -32,34 +33,20 @@ function loadMap(){
     $.get('api.php?request=' + JSON.stringify(request), function(response) {
         var data = JSON.parse(response);
         design.update(data);
-        $('#simulation #month').html(data.month);
-        // var text = '';
-        // data.schools.forEach(function(school){
-        //     text += '<div class="col-xs-6 col-md-3"><div class="blue section">'
-        //         + '<h3>' + school.name + '</h3><ul>';
-        //         var levelId = 1;
-        //         school.levels.forEach(function(level){
-        //             text += '<li class="break">Niveau ' + levelId + '</li>'
-        //                 + '<li>Nombre d\'étudiants : ' + level.students.length + '</li>'
-        //                 + '<li>Etudiants ayant un stage : 0 </li>';
-        //             levelId ++;
-        //         });
-        //         text += '<li class="break">laureats </li>'
-        //             + '<li>En chaumage :' + school.laureats.length + '</li>'
-        //             + '<li>En stage : 0 </li>'
-        //             + '<li>En travail : 0 </li>';
-        //         text += '</ul></div></div>';
-        // });
+        var percentage = 0;
+        if(data.studentsShouldHaveInternship > 0)
+            percentage = data.studentsHavingInternship / data.studentsShouldHaveInternship;
+        $('#studentsPercent').html( Math.floor(percentage * 100) + '%');
         
-        // data.companies.forEach(function(company){
-        //     text += '<div class="col-xs-6 col-md-3"><div class="brown section">'
-        //         + '<h3>' + company.name + '</h3><ul>'
-        //         + '<li>Nombre total des employés : ' + company.employeesNumber + '</li>'
-        //         + '<li>Nombre total des stages : ' + company.internships.length + '</li>'
-        //         + '<li>Nombre total des lauriats : ' + company.laureats.length + '</li>'
-        //         + '</ul></div></div>';
-        // });
-        // $('#simulation #map').html(text);
+        percentage = 0;
+        if(data.laureats.length > 0)
+            percentage = data.workingLaureats / data.laureats.length;
+        $('#laureatsPercent').html(Math.floor(percentage * 100) + '%');
+        
+        $('#simulation #month').html(data.month);
+
+        statistics.add(data);
+        statistics.show();
     });
 }
 
@@ -84,6 +71,19 @@ function showPage(id) {
         break;
         case 'simulation':
             loadMap();
+        break;
+        case 'newSimulation':
+            var request = {
+                action: 'new'
+            }
+            $.get('api.php?request=' + JSON.stringify(request), function(response) {
+                if(response == 'done'){
+                    showPage('simulation');
+                }else{
+                    showMsg('danger','Error: Check the server output !');
+                }
+            });
+            return;
         break;
         case 'act':
             act();
@@ -150,6 +150,7 @@ $(document).ready(function() {
     active = 'acceuil';
     showPage('acceuil');
     design = new Draw('graph');
+    statistics = new Statistic('statistics');
         // Création de formulaire des paramètres
         var request = {
             action: 'get_params'

@@ -30,13 +30,19 @@ public:
 	vector<int>& getSkills(){
 		return skills_;
 	};
-	vector<int>& getInternShips(){
+	void setSkills(vector<int> list){
+		skills_ = list;
+	}
+	vector<int>& getInternships(){
 		return internships_;
 	};
-	int getCurrenInternshipId(){
+	void setInternships(vector<int> list){
+		internships_ = list;
+	}
+	int getCurrentInternshipId(){
 		return currentIntershipId_;
 	};
-	void setCurrenInternshipId(int currentID){
+	void setCurrentInternshipId(int currentID){
 		currentIntershipId_ = currentID;
 	};
 	Point& getCurrentPosition(){
@@ -51,6 +57,11 @@ public:
 	void setAngle(double angle){
 		angle_ = angle;
 	}
+
+	void addInternship(int id){
+		internships_.push_back(id);
+	}
+	void addSkills(vector<int>&);
 	void act();
 };
 #endif

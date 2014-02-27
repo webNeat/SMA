@@ -1,4 +1,5 @@
-ressources/
-scripts/
+vendors
+ressources
+scripts
 *.o
 exe

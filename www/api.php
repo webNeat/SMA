@@ -11,6 +11,12 @@ if(isset($_GET['request'])){
 			case 'add_school':
 
 			break;
+			case 'new':
+				Socket::connect();
+				Socket::send('new');
+				$response = Socket::receive();
+				Socket::close();
+			break;
 			case 'get_world':
 				$response = File::getContent('world');
 			break;

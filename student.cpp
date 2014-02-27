@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <algorithm>
 #include "application.hpp"
 Student::Student(int schoolId, int levelId, int x, int y): Agent(STUDENT), currentPosition_(x,y) {
 	// cout << "Student Constructed ! id: " << id_ << endl;
@@ -8,6 +9,15 @@ Student::Student(int schoolId, int levelId, int x, int y): Agent(STUDENT), curre
 	currentIntershipId_ = -1;
 	angle_ = Application::uniforme_.get(0, 44 / 7);
 	// TODO : add skills depending on the school and level
+}
+
+void Student::addSkills(vector<int>& newSkills){
+	for(vector<int>::iterator it = newSkills.begin(); it != newSkills.end(); it ++){
+		vector<int>::iterator pos = find(skills_.begin(), skills_.end(), *it);
+		if(pos == skills_.end()){
+			skills_.push_back(*it);
+		}
+	}
 }
 
 void Student::act(){
@@ -37,10 +47,8 @@ void Student::act(){
 		y += dy;
 		companyId = World::getCompanyNearTo(x, y);
 		if(companyId != -1){
-			cout << "company found !" << endl;
-			internshipId = World::getCompany(companyId).getAvailableInternship();
+			internshipId = World::getCompany(companyId).getAvailableInternship(skills_);
 			if(internshipId != -1){
-				cout << "internship added for student " << id_ << endl;
 				currentIntershipId_ = internshipId;
 				World::getInternships().at(internshipId).setStudentId(id_);
 				break;

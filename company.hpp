@@ -14,20 +14,25 @@ private:
 	vector<int> skills_;
 	vector<int> internshipsIds_;
 	vector<int> laureatIds_;
-	// Statistiques
-	int employeesNumber_;
-	int hiredEmployeesNumber_;
-	int retiredEmployeesNumber_;
 	// Probability parametres
-	int averageInternshipsNumber_;
-	int averageEmployeesNumber_;
-	int averageHiredLauriasNumber_;
+	double averageInternshipsNumber_;
+	double internshipsNumberEcart_;
 	// Other parametres
 	int beginGivingInternships_;
 	int endGivingInternships_;
+	int skillsPerInternship_;
+
+	double getSkillsPercentage(vector<int>& );
 public:
  	Company();
- 	Company(string name, int = 0, int = 0);
+ 	Company(string name,
+ 		int x = 0,
+ 		int y = 0,
+ 		double internshipsNumber = 30,
+ 		double internshipsEcart = 5,
+ 		int start = 11,
+ 		int end = 3,
+ 		int skillsByInternship = 1);
  	~Company();
 	
 	vector<int>& getSkills(){
@@ -36,7 +41,10 @@ public:
 	void setSkills(vector<int> skills){
 		skills_ = skills;
 	};
-		Point& getPosition(){
+	int getSkillsPerInternship(){
+		return skillsPerInternship_;
+	}
+	Point& getPosition(){
 		return position_;
 	};
 
@@ -55,49 +63,20 @@ public:
 
 	int getAverageInternshipsNumber(){
 		return averageInternshipsNumber_;
-	};
-	void setAverageInternshipsNumber(int averageInternshipsNumber){
-		averageInternshipsNumber_ = averageInternshipsNumber;
-	};
+	}
+	int getInternshipsNumberEcart(){
+		return internshipsNumberEcart_;
+	}
+	void setInternshipsNumber(double average, double ecart){
+		averageInternshipsNumber_ = average;
+		internshipsNumberEcart_ = ecart; 
+	}
 
 	string getName(){
 		return name_;
 	};
  	void setName(string name){
  		name_ = name;
- 	};
-
- 	int getEmployeesNumber(){
- 		return employeesNumber_;
- 	};
-
-	void setEmployeesNumber(int employeesNumber){
- 		employeesNumber_ = employeesNumber;
- 	};
- 	
- 	int getHiredEmployeesNumber(){
- 		return hiredEmployeesNumber_;
- 	};
- 	void setHiredEmployeesNumber(int hiredEmployeesNumber){
- 		hiredEmployeesNumber_ = hiredEmployeesNumber;
- 	};
- 	int getRetiredEmployeesNumber(){
- 		return retiredEmployeesNumber_;
- 	};
- 	void setRetiredEmployeesNumber(int retiredEmployeesNumber){
- 		retiredEmployeesNumber_ = retiredEmployeesNumber;
- 	};
- 	int getAverageEmployeesNumber(){
- 		return averageEmployeesNumber_;
- 	};
- 	void setAverageEmployeesNumber(int averageEmployeesNumber){
- 		averageEmployeesNumber_ = averageEmployeesNumber;
- 	};
- 	int getAverageHiredLauriasNumber(){
- 		return averageHiredLauriasNumber_;
- 	};
- 	void setAverageHiredLauriasNumber(int averageHiredLauriasNumber){
- 		averageHiredLauriasNumber_ = averageHiredLauriasNumber;
  	};
  	int getBeginGivingInternships(){
  		return beginGivingInternships_;
@@ -112,10 +91,17 @@ public:
  		endGivingInternships_ = endGivingInternships;
  	};
 
- 	int getAvailableInternship();
-
+ 	int getAvailableInternship(vector<int>&);
  	bool addSkill(int);
+ 	void addLaureat(int id){
+ 		laureatIds_.push_back(id);
+ 	}
+ 	bool willHire(vector<int>&);
 
  	void act();
+ 	void print();
+
+ 	int getAvailableInternships();
+ 	int getHiredStudents();
 };
 #endif

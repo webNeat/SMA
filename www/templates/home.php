@@ -106,7 +106,36 @@
               <span class="badge" id="month"></span>
               Mois Suuivant
             </button>
-            <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="acceuil">Retour</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-7 col-md-offset-3">
+            <br>  
+            <ul class="nav nav-pills">
+              <li class="active"><a href="#"> Taux d'embauche des étudiants : <span class="badge" id="studentsPercent">5</span></a></li>
+              <li class="active"><a href="#"> Taux d'embauche des lauréats : <span class="badge" id="laureatsPercent">5</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row" id="statistics">
+          <div class="col-md-6">
+              <!-- <h2> Entreprise </h2>
+              <table  class="highchart" data-graph-container-before="1" data-graph-type="line">
+                <thead><tr>
+                    <th> Mois </th>
+                    <th>Offres de stages disponibles</th>
+                    <th>Nombre de stagiaires</th>
+                    <th>Lauréats recrutés</th>
+                </tr></thead>
+                <tbody>
+                    <tr><td>1</td><td> 1</td><td> 0</td><td> 1</td></tr>
+                    <tr><td>2</td><td>0</td><td>1</td><td>1</td></tr>
+                    <tr><td>3</td><td>0</td><td>1</td><td>2</td></tr>
+                    <tr><td>4</td><td>1</td><td>1</td><td>3</td></tr>
+                    <tr><td>44</td><td>2670964</td><td>5736961</td><td>12322413</td></tr>
+                    <tr><td>45</td><td>3914488</td><td>8407925</td><td>18059374</td></tr>
+                </tbody>
+              </table> -->
           </div>
         </div>
       </div>
@@ -152,7 +181,10 @@
 
     <script src="templates/js/jquery.min.js"></script>
     <script src="templates/js/bootstrap.min.js"></script>
+    <script src="templates/js/highcharts/highcharts.js"></script>
+    <script src="templates/js/charts.js"></script>
     <script src="templates/js/draw.js"></script>
+    <script src="templates/js/statistics.js"></script>
     <script src="templates/js/handler.js"></script>
   </body>
 </html>

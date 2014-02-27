@@ -55,3 +55,7 @@
 #graph {
     border: 2px solid #ddd;
 }
+
+table.highchart{
+    display: none;
+}
