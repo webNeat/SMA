@@ -1,1 +1,0 @@
-[{"name":"Sample","attributes":[{"name":"id","type":"int","modifier":"private","static":true,"getter":true,"setter":true},{"name":"name","type":"string","modifier":"private","static":false,"getter":true,"setter":false}],"methods":[{"name":"hello","type":"void","modifier":"public","virtual":"none","static":true}],"heritages":[{"name":"Father","type":"public"}]}]
