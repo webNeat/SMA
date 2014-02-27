@@ -4,6 +4,7 @@
 #include "application.hpp"
 
 int Controller::portNumber_;
+string Controller::browser_;
 string Controller::url_;
 
 void Controller::start(){
@@ -13,7 +14,7 @@ void Controller::start(){
 	File::loadWorld();
 
 	ServerSocket server(portNumber_);
-	string cmd = "firefox " + url_ + " &";
+	string cmd = browser_ + " " + url_ + " &";
 	system(cmd.c_str());
 	string request;
 	string response;

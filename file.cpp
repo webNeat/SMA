@@ -20,6 +20,7 @@ void File::loadConfig(){
 	input.close();
 	json::Object config = json::Deserialize(jsonStr);
 	Controller::setPortNumber(config["portNumber"]);
+	Controller::setBrowser(config["browser"]);
 	Controller::setUrl(config["url"]);
 }
 

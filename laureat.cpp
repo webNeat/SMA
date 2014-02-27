@@ -8,8 +8,8 @@ Laureat::Laureat(Student& student) : Agent(LAUREAT) {
 	currentCompanyId_ = -1;
 	skills_ = student.getSkills();
 	internships_ = student.getInternships();
-	currentPosition_.setX(student.getCurrentPosition().getX());
-	currentPosition_.setY(student.getCurrentPosition().getY());
+	currentPosition_.setX(World::getSchool(student.getSchoolId()).getPosition().getX());
+	currentPosition_.setY(World::getSchool(student.getSchoolId()).getPosition().getY());
 	angle_ = Application::uniforme_.get(0, 44 / 7);
 }
 

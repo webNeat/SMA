@@ -9,17 +9,21 @@ using namespace std;
 class Controller {
 private:
 	static int portNumber_;
+	static string browser_;
 	static string url_;
 public:
 	static int getPortNumber(){
 		return portNumber_;
-	};
+	}
 	static void setPortNumber(int pn){
 		portNumber_ = pn;
-	};
-	static void setUrl(string url){
-		url_ = url;
-	};
+	}
+	static void setBrowser(string name){
+		browser_ = name;
+	}
+	static void setUrl(string name){
+		url_ = name;
+	}
 	static void start();
 	static string updateParams();
 	static string run();
