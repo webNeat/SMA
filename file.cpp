@@ -52,7 +52,6 @@ void File::loadParams(){
 		it ++;
 	}
 	Application::setParams(params);
-	Application::printParams();
 }
 
 void File::saveSkills(){
