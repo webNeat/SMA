@@ -45,54 +45,6 @@
         </div>
       </div>
     </div>
-    
-    <!-- Nouvelle Simulation -->
-    <div class="container page" id="newSimulation" title="Nouvelle Simulation">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="addCompany">Ajouter Entreprise</button>
-          <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="addSchool">Ajouter Ecole</button>
-          <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="simulation">Commencer la simulation</button>
-          <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="acceuil">Retour</button>
-        </div>
-      </div>
-    </div>
-      <!-- Ajouter Entreprise -->
-      <div class="container page" id="addCompany" title="Nouvelle Entreprise">
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2">
-            <form class="form-horizontal" role="form" name="add_company">
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Nom</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" name="name" placeholder="Nom de l'entreprise">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Nombre des employés </label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" name="emplyeesNumber" placeholder="Nombre des employés">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn btn-primary">Ajouter</button>
-                </div>
-              </div>
-            </form>
-            <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="newSimulation">Retour</button>
-          </div>
-        </div>
-      </div>
-      <!-- Ajouter Ecole -->
-      <div class="container page" id="addSchool" title="Nouvelle Ecole">
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2">
-            <p> Add School Form Here </p>
-            <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="newSimulation">Retour</button>
-          </div>
-        </div>
-      </div>
       <!-- Simulation -->
       <div class="container page" id="simulation" title="Simulation">
         <div class="row">
@@ -119,66 +71,19 @@
         </div>
         <div class="row" id="statistics">
           <div class="col-md-6">
-              <!-- <h2> Entreprise </h2>
-              <table  class="highchart" data-graph-container-before="1" data-graph-type="line">
-                <thead><tr>
-                    <th> Mois </th>
-                    <th>Offres de stages disponibles</th>
-                    <th>Nombre de stagiaires</th>
-                    <th>Lauréats recrutés</th>
-                </tr></thead>
-                <tbody>
-                    <tr><td>1</td><td> 1</td><td> 0</td><td> 1</td></tr>
-                    <tr><td>2</td><td>0</td><td>1</td><td>1</td></tr>
-                    <tr><td>3</td><td>0</td><td>1</td><td>2</td></tr>
-                    <tr><td>4</td><td>1</td><td>1</td><td>3</td></tr>
-                    <tr><td>44</td><td>2670964</td><td>5736961</td><td>12322413</td></tr>
-                    <tr><td>45</td><td>3914488</td><td>8407925</td><td>18059374</td></tr>
-                </tbody>
-              </table> -->
           </div>
         </div>
       </div>
-    <!-- Charger une simulation -->
-    <div class="container page" id="continue" title="Charger une simulation">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <p>Une liste des simulations sauvegardées !</p>
-          <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="acceuil">Retour</button>
-        </div>
-      </div>
-    </div>
-
     <!-- Configuration -->
-    <!-- <div class="container page" id="config" title="Configuration">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="skills">Edition des Compétences</button>
-          <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="params">Modifier les paramètres</button>
-          <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="acceuil">Retour</button>
-        </div>
-      </div>
-    </div> -->
-      <!-- Gérer les compétences -->
-      <!-- <div class="container page" id="skills" title="Gérer les compétences">
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2">
-            <p>Gérer les compétences !</p>
-            <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="config">Retour</button>
-          </div>
-        </div>
-      </div> -->
-      <!-- Gérer les paramètres -->
       <div class="container page" id="params" title="Gérer les paramètres">
         <div class="row">
           <div class="col-md-8 col-md-offset-2">
-            <form class="form-horizontal" role="form" name="update_params" target="config">            
+            <form class="form-horizontal" role="form" name="update_params" target="acceuil">            
             </form>
             <button type="button" class="btn btn-primary btn-lg btn-block menu-item" target="acceuil">Retour</button>
           </div>
         </div>
       </div>
-
     <script src="templates/js/jquery.min.js"></script>
     <script src="templates/js/bootstrap.min.js"></script>
     <script src="templates/js/highcharts/highcharts.js"></script>

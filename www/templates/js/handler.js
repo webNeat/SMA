@@ -1,12 +1,3 @@
-/**
-TODO:
-    Draw Carte and blit schools & Companies
-    a loop to show students and Laureats movement (add a vector of positions describing the movement to Student and Laureat)
-    Animate everybody at the same time !! (a simple loop !)
-    Draw any new Company ( new flag to know if we should draw it or not)
-    Hande Clicks on Schools and Companies to show more details !!
- */
-
 var active;
 var design;
 var statistics;
